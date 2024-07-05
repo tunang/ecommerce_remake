@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+
+@layer base{
+    body{
+        @apply font-poppins;
+    }
+
+    h1{
+        @apply lg:text-5xl text-[40px]  font-bold;
+    }
+
+    h2{
+        @apply lg:text-[40px] text-[32px] font-bold;
+    }
+
+    h3{
+        @apply lg:text-[32px] text-2xl ;
+    }
+
+    h4{
+        @apply lg:text-2xl text-[20px] font-bold;
+    }
+
+    p{
+        @apply lg:text-[16px] text-[13px] ;
+    }
+}
+
+@layer components{
+    .nav-icon{
+        @apply h-8 w-8;
+    },
+
+    .black-text-stroke-1{
+        @apply drop-shadow-[-1px_0px_0px_black]
+    }
+}
