@@ -40,7 +40,7 @@ const Profile = () => {
 
   const handleClick = (index) => {
     setActiveIndex(index); // Update state on click
-    navigate(link[index]);
+    navigate(links[index]);
   };
 
   return (
