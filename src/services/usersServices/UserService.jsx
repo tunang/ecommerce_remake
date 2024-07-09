@@ -12,6 +12,7 @@ const registerApi = (firstname, lastname, email, password) =>{
 }
 
 const logoutApi = () => {
+    console.log('logout')
     return axiosInstance.delete("/api/auth/logout");
 }
 

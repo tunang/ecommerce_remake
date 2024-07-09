@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const buttonVariants = {
   hover: {
     backgroundColor: "#414141",
-    color: "#D8D8D8",
+    color: "#DDDDDD",
     transition: {
       duration: 0.1,
     },
@@ -18,16 +19,32 @@ const buttonVariants = {
 };
 
 const title = ["Your orders", "Address"];
+const links = ['/profile/orders', '/profile/address'];
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location.pathname);
+
   const [activeIndex, setActiveIndex] = useState(null); // State to track active h3 element
+
+
+  useEffect(() => {
+    links.forEach((link, index) => {
+      if(link === location.pathname){
+        setActiveIndex(index);
+      }
+    })  
+  },[location.pathname])
 
   const handleClick = (index) => {
     setActiveIndex(index); // Update state on click
+    navigate(link[index]);
   };
 
   return (
-    <div className="grid grid-cols-12 pt-12">
+    <>
       <div className="col-start-2 col-span-11 border-b border-quinary pb-4">
         <h1 className="font-light">Account</h1>
       </div>
@@ -52,7 +69,7 @@ const Profile = () => {
           Log out
         </p>
       </div>
-    </div>
+    </>
   );
 };
 

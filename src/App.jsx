@@ -21,6 +21,8 @@ import DetailProduct from "./components/Products/DetailProduct";
 import Profile from "./components/Profile/Profile";
 
 import { fetchCart } from "./redux/Reducer/cartReducer";
+import Orders from "./components/Profile/Orders";
+import Address from "./components/Profile/Address";
 
 const AppLayout = () => (
   <div>
@@ -32,10 +34,15 @@ const AppLayout = () => (
 );
 
 const ProfileLayout = () => (
+  
   <div>
     <NavBar />
     <div className="mt-[100px] mx-12">
-      <Outlet />
+      <div className="grid grid-cols-12 pt-12 gap-5">
+        <Profile/>
+
+        <Outlet />
+      </div>
     </div>
   </div>
 );
@@ -57,7 +64,8 @@ function App() {
           </Route>
 
           <Route element={<ProfileLayout />}>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/orders" element={<Orders/>}/>
+            <Route path="/profile/address" element={<Address/>}/>
           </Route>
         </Routes>
       </Router>

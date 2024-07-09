@@ -18,11 +18,6 @@ const updateCart = async (products) => {
   const test = {
     products: [...products]
   }
-  // console.log(test);
-  // let data = JSON.stringify(products);
-  // console.log(data);
-  // let data = JSON.stringify(test);
-  // console.log(data);
   let config = {
     method: 'put',
     maxBodyLength: Infinity,

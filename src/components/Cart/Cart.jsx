@@ -1,13 +1,14 @@
 // import axios from "axios";
-import { getCart, updateCart } from "../../services/usersServices/CartService";
 import axios from "../../services/axios/CustomAxiosWithHeader";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RiH1 } from "react-icons/ri";
-import { fetchCart } from "../../redux/Reducer/cartReducer";
 import { TaskAbortError } from "@reduxjs/toolkit";
 
 import { FaRegTrashCan } from "react-icons/fa6";
+import { RiH1 } from "react-icons/ri";
+import { fetchCart } from "../../redux/Reducer/cartReducer";
+import { getCart, updateCart } from "../../services/usersServices/CartService";
+
 
 const sizechart = ["X", "S", "M", "XL"];
 
