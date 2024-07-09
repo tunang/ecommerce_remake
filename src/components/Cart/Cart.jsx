@@ -25,15 +25,13 @@ const Cart = () => {
       console.log(product.price * product.qty);
     })
     setTotal(initialValue);
-
-  
   }, [cartState.products]);
 
 
   useEffect(() => {
     console.log("update cart")
-    updateCart(cartState.products);
-  })
+    dispatch(fetchCart());
+  },[])
 
 
 
@@ -106,7 +104,7 @@ const Cart = () => {
           </div>
 
           <div className="col-start-9 col-end-13 mt-6 ">
-            <div className="border-4 border-secondary p-6 rounded-2xl">
+            <div className="border-4 border-secondary p-6">
               <h2 className="font-normal">Paycheck</h2>
 
               {cartState.products.map((product, index) => {
@@ -131,6 +129,10 @@ const Cart = () => {
 
                 <h3 className="mt-6">{total}$</h3>
               </div>
+            </div>
+
+            <div className="text-center">
+              <button className="w-full text-xl text-white bg-quaternary py-3 mt-2">Check out</button>
             </div>
           </div>
         </div>

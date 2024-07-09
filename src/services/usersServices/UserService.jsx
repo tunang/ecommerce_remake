@@ -1,5 +1,5 @@
 import axios from '../axios/CustomUsersAxios'
-
+import axiosInstance from '../axios/CustomAxiosWithHeader'
 
 
 const loginApi = (email, password) => {
@@ -11,4 +11,8 @@ const registerApi = (firstname, lastname, email, password) =>{
     return axios.post("/api/auth/register", {firstname, lastname, email, password})
 }
 
-export { loginApi, registerApi }
+const logoutApi = () => {
+    return axiosInstance.delete("/api/auth/logout");
+}
+
+export { loginApi, registerApi, logoutApi }

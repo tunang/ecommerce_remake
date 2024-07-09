@@ -8,7 +8,7 @@ import Jewelry from "./Jewalry/Jewelry";
 import NewCollection from "./NewCollection/NewCollection";
 
 const Home = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
   const userState = useSelector((state) => state.user);
@@ -22,9 +22,6 @@ const Home = () => {
         <Jewelry />
 
         <Category />
-
-        
-
 
     </div> );
 }

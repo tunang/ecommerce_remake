@@ -44,11 +44,11 @@ const Login = () => {
 
     return ( <div className="w-[24%] mx-auto mt-28 items-center">
         <div className=" text-center">
-            <h1>Sign in</h1>
+            <h1 >Sign in</h1>
         </div>
 
         <div className="mt-6">
-            <h4>Email</h4>
+            <h4 className="font-normal">Email</h4>
             <input
                 className="w-full bg-quinary p-2 mt-[6px] rounded-md" 
                 type="text"
@@ -60,7 +60,7 @@ const Login = () => {
         </div>
 
         <div className="mt-[18px]">
-            <h4>Password</h4>
+            <h4 className="font-normal">Password</h4>
             <input
                 className="w-full bg-quinary p-2 mt-[6px] rounded-md" 
                 type="text"

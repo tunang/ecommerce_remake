@@ -84,7 +84,11 @@ const cartReducer = createSlice({
                     state.products.splice(index, 1);
                 }
             })
-        }
+        },
+
+        resetCart: (state, action) => {
+            state.products = [];
+        },
     },
 
     extraReducers: (builder) => {
@@ -97,20 +101,18 @@ const cartReducer = createSlice({
             console.log(action.payload.data.cart.products)
             
             state.products = action.payload.data.cart.products;
-            console.log(state)
             state.isLoading = false;
             state.isError = false;
-          })
+            console.log(state)
+        })
           .addCase(fetchCart.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-    
             toast.error("Wrong cart");
-    
           });
       },
 })
 
-export const { addCart, decreaseCart, delCart} = cartReducer.actions;
+export const { addCart, decreaseCart, delCart, resetCart} = cartReducer.actions;
 
 export default cartReducer.reducer;

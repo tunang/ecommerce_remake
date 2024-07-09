@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
@@ -7,6 +7,7 @@ import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import { RxDimensions } from "react-icons/rx";
 
+import { updateCart } from "../../services/usersServices/CartService";
 import fetchProducts from "../../services/usersServices/ProductsService";
 import { addCart } from "../../redux/Reducer/cartReducer";
 
@@ -29,7 +30,11 @@ const AddToCartButtonVariants = {
 const DetailProduct = () => {
 
   const dispatch = useDispatch();
+
   const { id } = useParams();
+
+  const cartState = useSelector((state) => state.cart);
+
 
   const { products: product, loading, error } = fetchProducts(`/${id}`);
 
@@ -65,6 +70,14 @@ const DetailProduct = () => {
   const addProductToCart = () => {
     dispatch(addCart({product, sizeIndex, total}));
   }
+
+  useEffect(() => {
+    console.log("update cart")
+    updateCart(cartState.products);
+  },[cartState.products])
+
+
+
 
   return (
     <>

@@ -26,6 +26,8 @@ const navigate = useNavigate();
     }
 
     const res = await registerApi(firstname, lastname, email, password);
+    const res2 = await createCa
+     
     console.log(res);
     if (res.status === 200) {
       toast.success("Register successfull");
@@ -44,7 +46,7 @@ const navigate = useNavigate();
 
       <div className="flex mt-6">
         <div className="basis-2/5">
-          <h4>First name</h4>
+          <h4 className="font-normal">First name</h4>
           <input
             className="w-full bg-quinary p-2 mt-[6px] rounded-md"
             type="text"
@@ -55,7 +57,7 @@ const navigate = useNavigate();
         </div>
 
         <div className="basis-3/5 ml-3">
-          <h4>Last name</h4>
+          <h4 className="font-normal">Last name</h4>
           <input
             className="w-full bg-quinary p-2 mt-[6px] rounded-md"
             type="text"
@@ -67,7 +69,7 @@ const navigate = useNavigate();
       </div>
 
       <div className="mt-6">
-        <h4>Email</h4>
+        <h4 className="font-normal">Email</h4>
         <input
           className="w-full bg-quinary p-2 mt-[6px] rounded-md"
           type="text"
@@ -78,7 +80,7 @@ const navigate = useNavigate();
       </div>
 
       <div className="mt-[18px]">
-        <h4>Password</h4>
+        <h4 className="font-normal">Password</h4>
         <input
           className="w-full bg-quinary p-2 mt-[6px] rounded-md"
           type="text"
@@ -89,7 +91,7 @@ const navigate = useNavigate();
       </div>
 
       <div className="mt-[18px]">
-        <h4>Confirm your password</h4>
+        <h4 className="font-normal">Confirm your password</h4>
         <input
           className="w-full bg-quinary p-2 mt-[6px] rounded-md"
           type="text"

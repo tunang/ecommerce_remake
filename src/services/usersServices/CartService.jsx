@@ -9,6 +9,7 @@ const createCart = async () => {
 
 const getCart = async () => {
   const res = await axiosInstance.get('/api/cart');
+  console.log(res.data.cart.products);
   return res;
 };
 
@@ -17,7 +18,7 @@ const updateCart = async (products) => {
   const test = {
     products: [...products]
   }
-  console.log(test);
+  // console.log(test);
   // let data = JSON.stringify(products);
   // console.log(data);
   // let data = JSON.stringify(test);
@@ -27,7 +28,7 @@ const updateCart = async (products) => {
     maxBodyLength: Infinity,
     url: '/api/cart',
     headers: { 
-      'Content-Type': 'application/json', 
+      
     },
     data: test
   };
@@ -36,4 +37,4 @@ const updateCart = async (products) => {
   return res;
 }
 
-export { getCart, updateCart };
+export {createCart, getCart, updateCart };

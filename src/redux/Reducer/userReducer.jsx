@@ -18,14 +18,12 @@ export const fetchUser = createAsyncThunk(
     // const res2 = await axios.get('https://ecom-server-ymra.onrender.com/api/auth/');
     // console.log(res2);
     // const res = await loginApi(email, password);
-
     const { data } = await loginApi(email, password);
     console.log(data);
 
     if (data && data.tokens) {
       localStorage.setItem("AccessToken", data.tokens.accessToken);
       localStorage.setItem("RefreshToken", data.tokens.refreshToken);
-
     }
 
     return { data, infomation: {email}};
@@ -34,7 +32,11 @@ export const fetchUser = createAsyncThunk(
 
 export const userReducer = createSlice({
   name: "user",
-  initialState: INITIAL_STATE,
+  initialState: {...INITIAL_STATE, account: {
+    email: "",
+    auth: localStorage.getItem("RefreshToken") !== null, // Check for RefreshToken
+    token: localStorage.getItem("RefreshToken"),
+  },},
   reducers: {
     handleLogout: (state, action) => {
       localStorage.removeItem("AccessToken");
