@@ -1,42 +1,64 @@
 // import axios from "axios";
-import axios from "../../services/axios/CustomAxiosWithHeader";
+// import axios from "../../services/axios/CustomAxiosWithHeader";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TaskAbortError } from "@reduxjs/toolkit";
+import {motion,useScroll, useMotionValueEvent } from "framer-motion"
+import { useNavigate } from "react-router-dom";
 
 import { FaRegTrashCan } from "react-icons/fa6";
 import { RiH1 } from "react-icons/ri";
-import { fetchCart } from "../../redux/Reducer/cartReducer";
+import { delCart, fetchCart } from "../../redux/Reducer/cartReducer";
 import { getCart, updateCart } from "../../services/usersServices/CartService";
 
 
 const sizechart = ["X", "S", "M", "XL"];
 
 const Cart = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const userState = useSelector((state) => state.user);
   const cartState = useSelector((state) => state.cart);
+
+  const { scrollY } = useScroll()
+
+
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   console.log("Page scroll: ", typeof(latest))
+  // })
+
+  const handleTrashIconButton = (productId) => {
+    dispatch(delCart(productId))
+  }
+
+
+  
+
   const [total, setTotal] = useState(0);
 
+  
+
   useEffect(() => {
+    updateCart(cartState.products);
+
     let initialValue = 0;
     cartState.products.forEach((product) => {
       initialValue += (product.price * product.qty);
-      console.log(product.price * product.qty);
+      // console.log(product.price * product.qty);
     })
     setTotal(initialValue);
   }, [cartState.products]);
 
 
   useEffect(() => {
-    console.log("update cart")
+    // console.log("update cart")
     dispatch(fetchCart());
   },[])
 
 
 
-  console.log(cartState.products)
+  // console.log(cartState.products)
   return (
     <>
       {userState.account.auth === true ? (
@@ -96,15 +118,15 @@ const Cart = () => {
                     </td>
 
                     <td className="border text-center">
-                      <FaRegTrashCan className="m-auto" />
+                      <FaRegTrashCan onClick={() => handleTrashIconButton(product.id)} className="m-auto" />
                     </td>
                   </tr>
                 );
               })}
             </table>
           </div>
-
-          <div className="col-start-9 col-end-13 mt-6 ">
+              
+          <motion.div className={`static col-start-9 col-end-13 mt-6`}>
             <div className="border-4 border-secondary p-6">
               <h2 className="font-normal">Paycheck</h2>
 
@@ -133,9 +155,9 @@ const Cart = () => {
             </div>
 
             <div className="text-center">
-              <button className="w-full text-xl text-white bg-quaternary py-3 mt-2">Check out</button>
+              <button onClick={() => navigate('/checkout')} className="w-full text-xl text-white bg-quaternary py-3 mt-2">Check out</button>
             </div>
-          </div>
+          </motion.div>
         </div>
       ) : (
         <h1>Chua dang nhap</h1>

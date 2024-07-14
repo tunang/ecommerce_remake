@@ -23,6 +23,9 @@ import Profile from "./components/Profile/Profile";
 import { fetchCart } from "./redux/Reducer/cartReducer";
 import Orders from "./components/Profile/Orders";
 import Address from "./components/Profile/Address";
+import CheckOut from "./components/CheckOut/CheckOut";
+import { setupAxiosInterceptors } from "./services/axios/CustomAxiosWithHeader";
+import Favorite from "./components/Favorite/Favorite";
 
 const AppLayout = () => (
   <div>
@@ -48,6 +51,8 @@ const ProfileLayout = () => (
 );
 
 function App() {
+  setupAxiosInterceptors();
+
   return (
     <div>
       <Toaster />
@@ -61,6 +66,8 @@ function App() {
             <Route path="/men" element={<MenPage />} />
             <Route path="/women" element={<WomenPage />} />
             <Route path="/product/:id" element={<DetailProduct />} />
+            <Route path="/checkout" element={<CheckOut />} />
+            <Route path="/favorite" element={<Favorite />} />
           </Route>
 
           <Route element={<ProfileLayout />}>

@@ -46,7 +46,7 @@ export const userReducer = createSlice({
       state.account.token = "";
       state.account.auth = false;
 
-      toast.success("Logout success");
+      // toast.success("Logout success");
 
     },
   },

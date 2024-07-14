@@ -2,7 +2,10 @@ import ProductBox from "./ProductBox";
 import {productsInstance} from "../../services/axios/CustomProductsAxios";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import ReactLoading from 'react-loading';
 import fetchProducts from "../../services/usersServices/ProductsService";
+import { circIn } from "framer-motion";
+import CircleLoading from "../Loading/CircleLoading";
 
 const ProductsPage = ({ url, categories }) => {
   const [productsList, setProductsList] = useState([]);
@@ -34,13 +37,15 @@ const ProductsPage = ({ url, categories }) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 gap-5">
-      {loading && <div>Loading...</div>}
-      {productsList &&
-        productsList.map((product, index) => {
-          return <ProductBox product={product} index={index} productIndex={productIndex} setProductIndex={setProductIndex}/>;
-        })}
-    </div>
+    <>
+      {loading && <CircleLoading /> }
+      <div className="grid grid-cols-12 gap-5">
+        {productsList &&
+          productsList.map((product, index) => {
+            return <ProductBox product={product} index={index} productIndex={productIndex} setProductIndex={setProductIndex}/>;
+          })}
+      </div>
+    </>
   );
 };
 

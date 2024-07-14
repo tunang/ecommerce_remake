@@ -5,13 +5,12 @@ import toast from "react-hot-toast";
 
 import { fetchUser } from "../../redux/Reducer/userReducer";
 import { fetchCart } from "../../redux/Reducer/cartReducer";
+import { fetchFavoriteList } from "../../redux/Reducer/favoriteReducer";
 
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-
 
     const [email, setEmail] = useState('nguyentuan22072004@gmail.com');
     const [password, setPassword] = useState('tuan');
@@ -38,6 +37,7 @@ const Login = () => {
     useEffect(() => {
         if(account && account.auth === true){
             dispatch(fetchCart());
+            dispatch(fetchFavoriteList())
             navigate("/");
         }
     },[account])

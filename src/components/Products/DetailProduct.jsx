@@ -12,6 +12,8 @@ import fetchProducts from "../../services/usersServices/ProductsService";
 import { addCart } from "../../redux/Reducer/cartReducer";
 
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import CircleLoading from "../Loading/CircleLoading";
 const sizeChart = ['X','S','M','XL']
 
 
@@ -68,7 +70,11 @@ const DetailProduct = () => {
   }
 
   const addProductToCart = () => {
-    dispatch(addCart({product, sizeIndex, total}));
+    if(sizeIndex){
+      dispatch(addCart({product, sizeIndex, total}));
+    }
+
+    toast.error('Cant add to cart, didnt choose size')
   }
 
   useEffect(() => {
@@ -81,7 +87,7 @@ const DetailProduct = () => {
 
   return (
     <>
-      {loading ? <h1>Loading</h1> :
+      {loading ? <CircleLoading /> :
       <div className="grid grid-cols-12 gap-5 pt-12">
 
         {/* Handle Image */}

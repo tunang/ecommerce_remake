@@ -5,6 +5,7 @@ import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import ProductBox from "../../Products/ProductBox";
+import CircleLoading from "../../Loading/CircleLoading";
 
 
 const buttonVariants = {
@@ -24,9 +25,11 @@ const NewCollection = () => {
     error,
   } = fetchProducts("/category/mens-shirts?limit=4");
 
-  console.log(newProducts);
+  // console.log(newProducts);
 
   return (
+    <>
+    {loading && <CircleLoading />}
     <div>
       <div className="grid grid-cols-12 gap-5 pt-12">
         <div className="flex flex-col items-center col-start-3 col-end-11">
@@ -54,6 +57,7 @@ const NewCollection = () => {
       </div>
 
     </div>
+    </>
   );
 };
 

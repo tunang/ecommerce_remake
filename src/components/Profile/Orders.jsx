@@ -4,6 +4,7 @@ import { getOrders } from "../../services/usersServices/OrderServices";
 
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
+import CircleLoading from "../Loading/CircleLoading";
 
 const sizechart = ["X", "S", "M", "XL"];
 
@@ -17,21 +18,29 @@ const buttonVariant = {
 
 const Orders = () => {
   const [orders, setOrders] = useState(getOrders());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchOrders = async () => {
+      setLoading(true);
       const fetchedOrders = await getOrders();
       setOrders(fetchedOrders); // Update state with fetched data
+      setLoading(false);
     };
 
     fetchOrders();
-    // console.log(orders.data.userOrders);
+    
   }, []);
 
-  console.log(orders);
+  // const {orders, loading, error} = getOrders();
+
+  // console.log(orders);
+
 
   return (
+    <>
     <div className="mt-8 col-span-6">
+    {loading && <CircleLoading />}
       {orders?.data?.userOrders.map((order, index) => {
         return (
           <div className="border-2 border-quinary mb-4 px-4 py-2">
@@ -68,6 +77,7 @@ const Orders = () => {
         );
       })}
     </div>
+    </>
   );
 };
 

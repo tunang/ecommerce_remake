@@ -1,5 +1,5 @@
 import axios from '../axios/CustomUsersAxios'
-import axiosInstance from '../axios/CustomAxiosWithHeader'
+import {axiosInstance} from '../axios/CustomAxiosWithHeader'
 
 
 const loginApi = (email, password) => {

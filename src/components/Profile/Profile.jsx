@@ -25,7 +25,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
   const [activeIndex, setActiveIndex] = useState(null); // State to track active h3 element
 

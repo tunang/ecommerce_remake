@@ -14,7 +14,7 @@ export const fetchCart = createAsyncThunk(
     "fetchCart",
     async (_, thunkApi) => {
       const { data } = await getCart();
-      console.log(data);
+    //   console.log(data);
       return { data };
     }
   );
@@ -78,9 +78,11 @@ const cartReducer = createSlice({
         },
 
         delCart: (state, action) => {
-            const product = action.payload;
+            console.log('check');
+            console.log(action.payload)
+            const productId = action.payload;
             state.products.forEach((x, index) => {
-                if (x.id === product.id) {
+                if (x.id === productId) {
                     state.products.splice(index, 1);
                 }
             })

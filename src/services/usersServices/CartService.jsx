@@ -1,17 +1,17 @@
-import axiosInstance from '../axios/CustomAxiosWithHeader';
+import {axiosInstance} from '../axios/CustomAxiosWithHeader';
 // import axios from "axios";
-
-
-const createCart = async () => {
-  const res = await axiosInstance.post('/api/cart');
-  return res;
-};
 
 const getCart = async () => {
   const res = await axiosInstance.get('/api/cart');
   console.log(res.data.cart.products);
   return res;
 };
+
+const createCart = async () => {
+  const res = await axiosInstance.post('/api/cart');
+  return res;
+};
+
 
 
 const updateCart = async (products) => {

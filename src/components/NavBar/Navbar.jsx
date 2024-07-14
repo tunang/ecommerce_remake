@@ -74,11 +74,12 @@ const NavBar = () => {
           </Link>
           <Link
             onClick={() => setIsHover(!isHover)}
-            onmouse
+            
             //   onMouseOut={() => setIsHover(false)}
           >
-            <CgProfile className="nav-icon " />
+            <CgProfile className="static nav-icon" />
           </Link>
+          
           <AnimatePresence>
             {isHover === true ? (
               <>
@@ -89,14 +90,14 @@ const NavBar = () => {
                       variants={dropdownVariants}
                       initial="hidden"
                       animate="visible"
-                      whileHover="visible"
+                      // whileHover="visible"
                       exit="hidden"
                       className="absolute right-[-10px] bottom-[-140px] bg-quinary rounded-xl px-6 py-2"
                     >
                       <Link to={"/profile/address"} className="text-xl">
                         Profile
                       </Link>
-                      <Link to={"/register" } className="block text-xl mt-2">
+                      <Link to={"/favorite" } className="block text-xl mt-2">
                         Favorite
                       </Link>
                       <Link to={"/profile/orders" } className="block text-xl mt-2">
@@ -113,9 +114,9 @@ const NavBar = () => {
                     variants={dropdownVariants}
                     initial="hidden"
                     animate="visible"
-                    whileHover="visible"
+                    // whileHover="visible"
                     exit="hidden"
-                    className="absolute right-[-10px] bottom-[-65px] bg-quinary rounded-xl px-6 py-2"
+                    className="absolute right-[-10px] bottom-[-65px]  bg-quinary rounded-xl px-6 py-2"
                   >
                     <Link to={"/login"} className="text-xl">
                       Login
