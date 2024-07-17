@@ -21,7 +21,7 @@ const Jewelry = () => {
         alt=""
         className="col-span-12 h-[350px] w-full object-cover rounded-lg"
       />
-      <div className="col-start-4 col-end-10 text-center mt-12">
+      <div className="col-start-1 col-end-13 lg:col-start-4 lg:col-end-10  text-center mt-12">
         <h1>New Collection</h1>
         <p className="mt-3">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint saepe

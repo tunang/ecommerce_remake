@@ -32,13 +32,12 @@ const NewCollection = () => {
     {loading && <CircleLoading />}
     <div>
       <div className="grid grid-cols-12 gap-5 pt-12">
-        <div className="flex flex-col items-center col-start-3 col-end-11">
+        <div className="flex flex-col items-center col-start-1 col-end-13 lg:col-start-3 lg:col-end-11 ">
           <h1>New Collection</h1>
           <p className="pt-2 text-center">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint saepe
             deserunt, similique corporis eveniet neque odit numquam cupiditate
-            vero vel. Consectetur adipisicing elit. Sint saepe deserunt,
-            similique corporis eveniet neque odit
+            
           </p>
         </div>
       </div>
