@@ -109,7 +109,7 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
   return (
     <div
       // border-2 border-tertiary
-      className="relative col-span-3 w-full bg-white"
+      className="relative col-span-6 md:col-span-4 lg:col-span-3 w-full bg-white"
       onClick={() => handleClick()}
       onMouseOver={() => setProductIndex(index)}
       onMouseLeave={() => setProductIndex("")}

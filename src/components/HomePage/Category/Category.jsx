@@ -25,9 +25,9 @@ const Category = () => {
     <div className="grid grid-cols-12 gap-5 mt-12">
       {ImgUrls.map((ImgUrl, index) => {
         return (
-          <div className="relative col-span-12" key={index}>
-            <img src={ImgUrl} alt="" className="relative w-full h-[100px] lg:h-[500px] object-cover rounded-2xl"/>
-            <p className="absolute text-4xl lg:text-5xl text-white top-[70%] left-[3%]">{tags[index]}</p>
+          <div className="relative col-span-12 lg:col-span-4" key={index}>
+            <img src={ImgUrl} alt="" className="relative w-full h-[350px] lg:h-[500px] object-cover rounded-2xl"/>
+            <p className="absolute text-4xl md:text-5xl text-white top-[70%] left-[3%]">{tags[index]}</p>
             <motion.button onClick={() => navigate('/men') } variants={buttonVariants} whileTap='click' className="absolute top-[82%] left-[3%] text-3xl text-white bg-tertiary px-10 py-2 rounded-full ">See detail</motion.button>
             
           </div>

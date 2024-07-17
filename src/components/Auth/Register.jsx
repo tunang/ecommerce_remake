@@ -39,12 +39,12 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="w-[24%] mx-auto mt-28 items-center">
+    <div className="w-[70%] md:w-[60%] lg:w-[30%] mx-auto mt-28 items-center">
       <div className=" text-center">
         <h1>Sign up</h1>
       </div>
 
-      <div className="flex mt-6">
+      <div className="md:flex mt-6">
         <div className="basis-2/5">
           <h4 className="font-normal">First name</h4>
           <input
@@ -56,7 +56,7 @@ const navigate = useNavigate();
           />
         </div>
 
-        <div className="basis-3/5 ml-3">
+        <div className="basis-3/5 md:ml-3 mt-[6px] md:mt-0">
           <h4 className="font-normal">Last name</h4>
           <input
             className="w-full bg-quinary p-2 mt-[6px] rounded-md"

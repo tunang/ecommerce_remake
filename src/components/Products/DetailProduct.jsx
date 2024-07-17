@@ -91,10 +91,10 @@ const DetailProduct = () => {
   return (
     <>
       {loading ? <CircleLoading /> :
-      <div className="grid grid-cols-12 gap-5 pt-12">
+      <div className="grid grid-cols-12 gap-5 lg:pt-12">
 
         {/* Handle Image */}
-        <div className="col-start-2 col-end-7 flex relative w-full h-full overflow-hidden border border-quinary">
+        <div className="col-start-1 col-end-13 lg:col-start-2 lg:col-end-7 flex relative w-full h-full overflow-hidden border border-quinary">
           {product?.images?.map((image, index) => {
             return (
               <div
@@ -121,7 +121,7 @@ const DetailProduct = () => {
 
 
         {/* Handle Information */}
-        <div className="col-start-7 col-end-12 ml-12 mt-4"> 
+        <div className="col-start-1 col-end-13 lg:col-start-7 lg:col-end-12 lg:ml-12 mt-4"> 
             <div className=" border-b-2 border-quinary pb-2">
                 <h1 className="font-normal">{product.title}</h1>
                 <h4 className="mt-4">{product.price}$</h4>
@@ -153,15 +153,33 @@ const DetailProduct = () => {
                 })}
             </div>
 
-            <div className="flex mt-6 justify-between">
+            <div className="hidden lg:flex mt-6 justify-between">
                 <div className="basis-[25%] ">
                     <button className="text-xl w-12 leading-[48px] border-y-2 border-l-2 border-primary" onClick={() => total === 1 ? setTotal(1) : setTotal(total - 1)}>-</button>
                     <button className="text-xl w-12 leading-[48px] border-2 border-primary">{total}</button>
                     <button className="text-xl w-12 leading-[48px] border-y-2 border-r-2 border-primary" onClick={() => setTotal(total + 1)}>+</button>
                 </div>
+
+
                 <motion.button variants={AddToCartButtonVariants} whileTap='click' className="text-xl text-quinary bg-primary font-medium basis-[60%] leading-[48px] border-2 border-primary" onClick={() => addProductToCart()} >Add to cart</motion.button>
                 
-                <button className="text-3xl basis-[10%] leading-[48px] border-2 border-primary"><IoHeartOutline className="m-auto" /></button>
+                <button className=" text-3xl basis-[10%] leading-[48px] border-2 border-primary"><IoHeartOutline className="m-auto" /></button>
+            </div>
+
+            <div className="lg:hidden flex-wrap lg:flex mt-6 justify-between">
+
+                <h4 className=" font-normal mb-2">Quantity</h4>
+                <div className="basis-[25%] ">
+                    <button className="text-xl w-12 leading-[48px] border-y-2 border-l-2 border-primary" onClick={() => total === 1 ? setTotal(1) : setTotal(total - 1)}>-</button>
+                    <button className="text-xl w-12 leading-[48px] border-2 border-primary">{total}</button>
+                    <button className="text-xl w-12 leading-[48px] border-y-2 border-r-2 border-primary" onClick={() => setTotal(total + 1)}>+</button>
+                </div>
+
+                <div className="flex justify-between mt-4">
+                  <motion.button variants={AddToCartButtonVariants} whileTap='click' className="text-xl text-quinary bg-primary font-medium basis-[90%] leading-[48px] border-2 border-primary" onClick={() => addProductToCart()} >Add to cart</motion.button>
+                  
+                  <button className=" text-3xl w-16 leading-[48px] border-2 border-primary"><IoHeartOutline className="m-auto" /></button>
+                </div>
             </div>
         </div>
         
