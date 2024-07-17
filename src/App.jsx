@@ -31,7 +31,7 @@ import Infomation from "./components/Profile/Infomation";
 const AppLayout = () => (
   <div>
     <NavBar />
-    <div className="mt-[100px] mx-6 lg:mx-12">
+    <div className="mt-[85px] lg:mt-[100px] mx-6 lg:mx-12">
       <Outlet />
     </div>
   </div>
@@ -41,7 +41,7 @@ const ProfileLayout = () => (
   
   <div>
     <NavBar />
-    <div className="mt-[100px] mx-6 lg:mx-1">
+    <div className="mt-[85px] lg:mt-[100px] mx-6 lg:mx-1">
       <div className="grid grid-cols-12 pt-12 gap-5">
         <Profile/>
 
