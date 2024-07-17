@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-import { fetchCart } from "../../redux/Reducer/cartReducer";
+import { fetchCart, resetCart } from "../../redux/Reducer/cartReducer";
 import { createOrder } from "../../services/usersServices/OrderServices";
+import { updateCart } from "../../services/usersServices/CartService";
 
 const sizechart = ["X", "S", "M", "XL"];
 
@@ -26,6 +27,8 @@ const CheckOut = () => {
   const [detail, setdetail] = useState("");
   const [paymentOption, setPaymentOption] = useState("");
 
+  const [checkOutStatus, setCheckOutStatus] = useState(false);
+
   const [total, setTotal] = useState(0);
 
   console.log(paymentOption);
@@ -44,8 +47,13 @@ const CheckOut = () => {
     dispatch(fetchCart());
   }, []);
 
-  const handleCheckOutButton = () =>{
-      createOrder({products: cartState.products,country, city, province, detail, phonenumber, paymentOption, name, email  })
+  const handleCheckOutButton = async () =>{
+    setCheckOutStatus(true);
+    await createOrder({products: cartState.products,country, city, province, detail, phonenumber, paymentOption, name, email })
+    setCheckOutStatus(false);
+    dispatch(resetCart());
+    await updateCart([]);
+    navigate('/')
   }
   return (
     <>

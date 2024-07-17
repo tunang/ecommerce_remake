@@ -72,9 +72,12 @@ const DetailProduct = () => {
   const addProductToCart = () => {
     if(sizeIndex){
       dispatch(addCart({product, sizeIndex, total}));
+      toast.success('Added')
     }
+    else{
+      toast.error('Cant add to cart, didnt choose size')
 
-    toast.error('Cant add to cart, didnt choose size')
+    }
   }
 
   useEffect(() => {

@@ -32,12 +32,7 @@ const Cart = () => {
     dispatch(delCart(productId))
   }
 
-
-  
-
   const [total, setTotal] = useState(0);
-
-  
 
   useEffect(() => {
     updateCart(cartState.products);

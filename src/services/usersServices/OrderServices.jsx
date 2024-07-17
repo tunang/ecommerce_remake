@@ -1,5 +1,4 @@
 import {axiosInstance} from "../axios/CustomAxiosWithHeader";
-
 import { useState, useEffect } from "react";
 
 const getOrders = async () => {
@@ -11,11 +10,12 @@ const getOrders = async () => {
     // const [loading, setLoading] = useState(false);
     // const [error, setError] = useState('');
 
-    // let getOrders = async() => {
+    // let getOrders = async () => {
     //     try{
     //         setLoading(true);
     //         const res = await axiosInstance.get('/api/order');
-    //         setOrders(res.data.userOrders);
+    //         setOrders(res);
+    //         console.log(res);
     //         setLoading(false);
     //     }
     //     catch(err){
@@ -27,13 +27,13 @@ const getOrders = async () => {
     //     getOrders();
     // }, []);
 
-    // return { orders, loading, error };
+    // return {orders, loading, error};
   };
 
 
   const createOrder = async ({products, country, city, province, detail, phonenumber, paymentOption, name, email }) => {
-    console.log
     
+
     const orderData = {
       products: [...products],
       address:{
@@ -57,9 +57,16 @@ const getOrders = async () => {
       },
       data: orderData
     };
-  
+   
     const res = await axiosInstance.request(config);
+    
     return res;
   }
 
-  export {getOrders, createOrder};
+  const deleteOrder = async(id) => {
+    console.log(id);
+    const res = await axiosInstance.delete(`/api/order/${id}`);
+    return res;
+  }
+
+  export {getOrders, createOrder, deleteOrder};

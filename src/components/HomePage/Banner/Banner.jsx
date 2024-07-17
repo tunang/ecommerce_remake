@@ -38,7 +38,7 @@ const Banner = () => {
   }
 
   return (
-    <div className="relative ">
+    <div className="relative">
       <div className="flex relative w-full h-full overflow-hidden">
         {panels.map((panel, index) => {
           return (
@@ -46,22 +46,20 @@ const Banner = () => {
               className="block w-full h-full shrink-0 grow-0 transition duration-500"
               style={{ transform: `translateX(${-Index * 100}%)` }}
             >
-              <div className="relative w-full h-[660px] rounded">
+              <div className="relative w-full h-[350px] md:h-[400px] lg:h-[660px] rounded">
                 <div className="absolute w-full h-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-[15%]"></div>
                 <img
                   className="w-full h-full object-cover rounded"
                   src={panel}
                   alt=""
                 />
-                <h1 className="absolute text-7xl text-white bottom-[30%] left-[5%] drop-shadow-[-3px_3px_0px_black]">
+                <h1 className="absolute text-4xl md:text-5xl lg:text-7xl text-white bottom-[30%] left-[5%] drop-shadow-[-3px_3px_0px_black]">
                   NEW COLLECTION
                 </h1>
                 <p className="absolute w-1/2 text-white bottom-[20%] left-[5%]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aenean ex tortor, laoreet ac efficitur id, sodales eget neque.
-                  Ut mollis.
                 </p>
-                <button className="absolute bg-white  bottom-[20%] right-[10%] text-4xl font-bold px-10 py-3 rounded-full">
+                <button className="hidden lg:block absolute bg-white  bottom-[20%] right-[10%] text-4xl font-bold px-10 py-3 rounded-full">
                   Buy Now
                 </button>
               </div>
@@ -80,7 +78,7 @@ const Banner = () => {
 
       <div className="flex absolute w-full align-middle justify-center bottom-[1%]">
         {panels.map((panel, panelIndex) => {
-          return <div onClick={() => setIndex(panelIndex)}>{Index === panelIndex ? <GoDotFill className="w-12 h-12 text-quinary" key={panelIndex}/> : <GoDot className="w-12 h-12 text-quinary" key={panelIndex}/>}</div>
+          return <div onClick={() => setIndex(panelIndex)}>{Index === panelIndex ? <GoDotFill className="w-6 h-6 lg:w-12 lg:h-12 text-quinary" key={panelIndex}/> : <GoDot className="w-6 h-6 lg:w-12 lg:h-12 text-quinary" key={panelIndex}/>}</div>
         })}
       </div>
     </div>

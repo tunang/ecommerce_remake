@@ -22,10 +22,11 @@ import Profile from "./components/Profile/Profile";
 
 import { fetchCart } from "./redux/Reducer/cartReducer";
 import Orders from "./components/Profile/Orders";
-import Address from "./components/Profile/Address";
+
 import CheckOut from "./components/CheckOut/CheckOut";
 import { setupAxiosInterceptors } from "./services/axios/CustomAxiosWithHeader";
 import Favorite from "./components/Favorite/Favorite";
+import Infomation from "./components/Profile/Infomation";
 
 const AppLayout = () => (
   <div>
@@ -72,7 +73,7 @@ function App() {
 
           <Route element={<ProfileLayout />}>
             <Route path="/profile/orders" element={<Orders/>}/>
-            <Route path="/profile/address" element={<Address/>}/>
+            <Route path="/profile/infomation" element={<Infomation/>}/>
           </Route>
         </Routes>
       </Router>

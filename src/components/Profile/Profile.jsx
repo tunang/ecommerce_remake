@@ -1,6 +1,18 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
+
+
+
+import { handleLogout } from "../../redux/Reducer/userReducer";
+
+
+
+import { resetCart } from "../../redux/Reducer/cartReducer";
+import { logoutApi } from "../../services/usersServices/UserService";
+import { useDispatch } from "react-redux";
+
 const buttonVariants = {
   hover: {
     backgroundColor: "#414141",
@@ -18,10 +30,11 @@ const buttonVariants = {
   },
 };
 
-const title = ["Your orders", "Address"];
-const links = ['/profile/orders', '/profile/address'];
+const title = ["Your orders", "Infomation"];
+const links = ['/profile/orders', '/profile/infomation'];
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,6 +42,11 @@ const Profile = () => {
 
   const [activeIndex, setActiveIndex] = useState(null); // State to track active h3 element
 
+  const handleLogoutClick = async () => {
+    await logoutApi();
+    dispatch(resetCart());
+    dispatch(handleLogout());
+  };
 
   useEffect(() => {
     links.forEach((link, index) => {
@@ -64,7 +82,7 @@ const Profile = () => {
 
         <p
           className="inline-block text-xl cursor-pointer mx-12 my-6 border border-black px-4 py-2 hover:text-red-500 hover:border-red-500"
-          onClick={() => handleClick(-1)}
+          onClick={() => handleLogoutClick()}
         >
           Log out
         </p>
