@@ -172,7 +172,7 @@ const NavBar = () => {
                         className="absolute right-[-10px] bottom-[-140px] bg-quinary rounded-xl px-6 py-2"
                       >
                         <Link to={"/profile/infomation"} className="text-xl">
-                          Information
+                          Profile
                         </Link>
                         <Link to={"/favorite"} className="block text-xl mt-2">
                           Favorite

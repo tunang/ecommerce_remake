@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TaskAbortError } from "@reduxjs/toolkit";
-import {motion,useScroll, useMotionValueEvent } from "framer-motion"
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -11,26 +11,24 @@ import { RiH1 } from "react-icons/ri";
 import { delCart, fetchCart } from "../../redux/Reducer/cartReducer";
 import { getCart, updateCart } from "../../services/usersServices/CartService";
 
-
 const sizechart = ["X", "S", "M", "XL"];
 
 const Cart = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const userState = useSelector((state) => state.user);
   const cartState = useSelector((state) => state.cart);
 
-  const { scrollY } = useScroll()
-
+  const { scrollY } = useScroll();
 
   // useMotionValueEvent(scrollY, "change", (latest) => {
   //   console.log("Page scroll: ", typeof(latest))
   // })
 
   const handleTrashIconButton = (productId) => {
-    dispatch(delCart(productId))
-  }
+    dispatch(delCart(productId));
+  };
 
   const [total, setTotal] = useState(0);
 
@@ -39,19 +37,16 @@ const Cart = () => {
 
     let initialValue = 0;
     cartState.products.forEach((product) => {
-      initialValue += (product.price * product.qty);
+      initialValue += product.price * product.qty;
       // console.log(product.price * product.qty);
-    })
+    });
     setTotal(initialValue);
   }, [cartState.products]);
-
 
   useEffect(() => {
     // console.log("update cart")
     dispatch(fetchCart());
-  },[])
-
-
+  }, []);
 
   // console.log(cartState.products)
   return (
@@ -62,10 +57,10 @@ const Cart = () => {
             <h3 className="">Shopping cart</h3>
           </div>
 
-          <div className="col-start-1 col-end-9 mt-6">
+          <div className="col-start-1 col-end-13 md:col-end-9 mt-6">
             <table className="w-full border-collapse">
-              <tr className="border ">
-                <td className="border  w-[50%]">
+              <tr className="hidden md:table-row-group border">
+                <td className="border w-[50%]">
                   <p className="text-xl font-semibold leading-[60px] ml-7">
                     Product
                   </p>
@@ -77,26 +72,55 @@ const Cart = () => {
                   <p className="text-xl font-semibold">Total</p>
                 </td>
 
-                <td className="border  w-[5%] text-center"></td>
+                <td className="border w-[5%] text-center"></td>
               </tr>
               {cartState.products.map((product, index) => {
                 return (
                   <tr>
-                    <td className="border border-quinary">
-                      <div className="flex ml-7">
-                        <div>
-                          <img src={product.thumbnail} alt="" />
+                    <td className="border border-quinary mx-7">
+                      <div className="flex flex-col mb-4">
+                        <div className="flex">
+                          <div>
+                            <img className="h-[250px] md:h-full object-cover" src={product.thumbnail} alt="" />
+                          </div>
+
+                          <div className="flex flex-col justify-around md:justify-center">
+                            <div>
+                              <p className="font-medium">{product.title}</p>
+                              <p>Size: {sizechart[product.size]}</p>
+                              <p>{product.price}$</p>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="flex flex-col justify-center">
-                          <p className="font-medium">{product.title}</p>
-                          <p>Size: {sizechart[product.size]}</p>
-                          <p>{product.price}$</p>
+                        <div className="flex md:hidden items-center justify-around">
+                          <div className="text-center">
+                            <button className=" w-8 leading-[32px] border-y-2 border-l-2 ">
+                              -
+                            </button>
+                            <button className=" w-8 leading-[32px] border-2 ">
+                              {product.qty}
+                            </button>
+                            <button className=" w-8 leading-[32px] border-y-2 border-r-2 ">
+                              +
+                            </button>
+                          </div>
+
+                          <div className="text-center">
+                            <p>{product.price * product.qty}</p>
+                          </div>
+
+                          <div className="text-center">
+                            <FaRegTrashCan
+                              onClick={() => handleTrashIconButton(product.id)}
+                              className="m-auto"
+                            />
+                          </div>
                         </div>
                       </div>
                     </td>
 
-                    <td className="border  text-center">
+                    <td className="hidden md:table-cell border text-center">
                       <button className=" w-8 leading-[32px] border-y-2 border-l-2 ">
                         -
                       </button>
@@ -108,20 +132,25 @@ const Cart = () => {
                       </button>
                     </td>
 
-                    <td className="border  text-center">
+                    <td className="hidden md:table-cell border text-center">
                       <p>{product.price * product.qty}</p>
                     </td>
 
-                    <td className="border text-center">
-                      <FaRegTrashCan onClick={() => handleTrashIconButton(product.id)} className="m-auto" />
+                    <td className="hidden md:table-cell border text-center">
+                      <FaRegTrashCan
+                        onClick={() => handleTrashIconButton(product.id)}
+                        className="m-auto"
+                      />
                     </td>
                   </tr>
                 );
               })}
             </table>
           </div>
-              
-          <motion.div className={`static col-start-9 col-end-13 mt-6`}>
+
+          <motion.div
+            className={`static col-start-1 md:col-start-9 col-end-13 mt-6`}
+          >
             <div className="border-4 border-secondary p-6">
               <h2 className="font-normal">Paycheck</h2>
 
@@ -150,7 +179,12 @@ const Cart = () => {
             </div>
 
             <div className="text-center">
-              <button onClick={() => navigate('/checkout')} className="w-full text-xl text-white bg-quaternary py-3 mt-2">Check out</button>
+              <button
+                onClick={() => navigate("/checkout")}
+                className="w-full text-xl text-white bg-quaternary py-3 mt-2"
+              >
+                Check out
+              </button>
             </div>
           </motion.div>
         </div>

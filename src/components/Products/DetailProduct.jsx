@@ -166,7 +166,7 @@ const DetailProduct = () => {
                 <button className=" text-3xl basis-[10%] leading-[48px] border-2 border-primary"><IoHeartOutline className="m-auto" /></button>
             </div>
 
-            <div className="lg:hidden flex-wrap lg:flex mt-6 justify-between">
+            <div className="lg:hidden flex-wrap mt-6 justify-between">
 
                 <h4 className=" font-normal mb-2">Quantity</h4>
                 <div className="basis-[25%] ">

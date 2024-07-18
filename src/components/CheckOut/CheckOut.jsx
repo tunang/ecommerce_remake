@@ -63,7 +63,7 @@ const CheckOut = () => {
             <h3 className="">Checkout</h3>
           </div>
 
-          <div className="col-start-1 col-end-4">
+          <div className="col-start-1 col-end-13 md:col-end-8 lg:col-end-4">
             <h4 className="font-light mb-2">Order infomation</h4>
             {/* <p className="mb-2">Email: {userState.account.email}</p> */}
 
@@ -138,11 +138,11 @@ const CheckOut = () => {
             </div>
           </div>
 
-          <div className="col-start-4 col-end-9 ml-12">
+          <div className="col-start-1 col-end-13 md:col-start-8 md:col-end-13 lg:col-start-4 lg:col-end-9 md:ml-12">
             <h4 className="font-light mb-2">Payment</h4>
 
             <div className="flex flex-col">
-              <div className="flex align-middle border-2 w-fit px-8 py-4">
+              <div className="flex align-middle border-2 w-full lg:w-fit  px-8 py-4">
                 <input
                   className="w-6 h-6"
                   type="radio"
@@ -157,7 +157,7 @@ const CheckOut = () => {
                 </label>
               </div>
 
-              <div className="flex align-middle border-2 w-1/2 px-8 py-4 mt-2">
+              <div className="flex align-middle border-2 w-full lg:w-fit px-8 py-4 mt-2">
                 <input
                   className="w-6 h-6"
                   type="radio"
@@ -174,7 +174,7 @@ const CheckOut = () => {
             </div>
           </div>
 
-          <motion.div className={`static col-start-9 col-end-13 mt-6`}>
+          <motion.div className={`static col-start-1  md:col-start-7 lg:col-start-9 col-end-13 mt-6`}>
             <div className="border-4 border-secondary p-6">
               <h2 className="font-normal">Paycheck</h2>
 

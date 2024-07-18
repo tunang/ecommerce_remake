@@ -46,7 +46,7 @@ const Banner = () => {
               className="block w-full h-full shrink-0 grow-0 transition duration-500"
               style={{ transform: `translateX(${-Index * 100}%)` }}
             >
-              <div className="relative w-full h-[300px] md:h-[400px] lg:h-[660px] rounded">
+              <div className="relative w-full h-[250px] md:h-[400px] lg:h-[660px] rounded">
                 <div className="absolute w-full h-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-[15%]"></div>
                 <img
                   className="w-full h-full object-cover rounded"

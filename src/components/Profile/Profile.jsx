@@ -2,12 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
-
-
 import { handleLogout } from "../../redux/Reducer/userReducer";
-
-
 
 import { resetCart } from "../../redux/Reducer/cartReducer";
 import { logoutApi } from "../../services/usersServices/UserService";
@@ -30,7 +25,7 @@ const buttonVariants = {
   },
 };
 
-const title = ["Your orders", "Infomation"];
+const title = ["Your orders", "Profile"];
 const links = ['/profile/orders', '/profile/infomation'];
 
 const Profile = () => {
@@ -63,10 +58,10 @@ const Profile = () => {
 
   return (
     <>
-      <div className="col-start-2 col-span-11 border-b border-quinary pb-4">
+      <div className="col-start-1 lg:col-start-2 lg:col-span-11 border-b border-quinary pb-4">
         <h1 className="font-light">Account</h1>
       </div>
-      <div className="col-start-2 col-span-3 mt-8">
+      <div className="hidden lg:block col-start-2 col-span-3 mt-8">
         {title.map((item, index) => (
           <motion.h3
             key={index} // Add key prop for better performance

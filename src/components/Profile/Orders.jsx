@@ -65,7 +65,7 @@ const Orders = () => {
 
   return (
     <>
-    <div className="mt-8 col-span-6">
+    <div className="mt-8 col-span-12 lg:col-span-6">
     {loading && <CircleLoading />}
       {orders?.data?.userOrders.map((order, index) => {
         return (
