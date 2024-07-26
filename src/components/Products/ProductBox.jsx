@@ -9,6 +9,9 @@ import { updateFavoriteList } from "../../services/usersServices/FavoriteService
 import { useEffect, useState } from "react";
 import ProductModal from "./ProductModal";
 
+import { FaRegEye } from "react-icons/fa";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
+
 
 const modalVariants = {
   hidden: {
@@ -174,7 +177,7 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
               exit="hidden"
               className="absolute top-[40%] left-[50%] translate-y-[-50%] translate-x-[-50%] text-quinary bg-tertiary px-4 py-2 rounded-full cursor-pointer"
             >
-              View detail
+              <FaRegEye className="inline-block"/> Detail
             </motion.button>
 
             <motion.button
@@ -188,7 +191,7 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
               onClick={(e) => { handleAddCartButton(product, e) }}
               className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] text-quinary bg-tertiary px-4 py-2 rounded-full cursor-pointer"
             >
-              Add to cart
+              <MdOutlineShoppingCartCheckout className="inline-block"/> Add
             </motion.button>
           </>
         ) : (

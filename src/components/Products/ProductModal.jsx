@@ -81,13 +81,17 @@ const ProductModal = ({id, setIsShowingModal}) => {
   }
 
   const addProductToCart = () => {
-    if(sizeIndex >= 0){
-      dispatch(addCart({product, sizeIndex, total}));
-      toast.success('Added')
+    if(userState.account.auth){
+      if(sizeIndex >= 0){
+        dispatch(addCart({product, sizeIndex, total}));
+        toast.success('Added')
+      }
+      else{
+        toast.error("Didn't choose size")
+      }
     }
     else{
-      toast.error('Cant add to cart, didnt choose size')
-
+      toast.error("Didn't login")
     }
   }
 

@@ -23,7 +23,7 @@ let hasRetried = false;
 
 const setupAxiosInterceptors = () => {
   const dispatch = useDispatch();
-  
+
   axiosInstance.interceptors.request.use(
     async (req) => {
       console.log("Request interceptors ran");
@@ -49,28 +49,29 @@ const setupAxiosInterceptors = () => {
       console.log("Fail Respond interceptors ran");
       const { config, response } = err;
       const originalRequest = config;
-      
+
       const RefreshToken = localStorage.getItem("RefreshToken");
       if (!RefreshToken) {
         // No refresh token, handle logout permanently
-        console.log('check')
+        console.log("check");
         toast.error("Your login session timed out");
         // dispatch(handleLogout());
         return Promise.reject(err); // Don't retry without a refresh token
       }
 
       const RefreshTokenExpire = jwtDecode(RefreshToken);
-      const isRefreshTokenExpired = dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
+      const isRefreshTokenExpired =
+        dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
       console.table("isRefreshTokenExpired", isRefreshTokenExpired);
       // **Improved retry logic:** Use a dedicated retry flag for clarity
       // let hasRetried = false;
       if (isRefreshTokenExpired) {
-                // Refresh token expired, handle permanent logout
-                toast.error("Your login session timed out");
-                dispatch(handleLogout());
-                dispatch(resetCart());
-                return Promise.reject(err); // Don't retry with an expired refresh token
-              }
+        // Refresh token expired, handle permanent logout
+        toast.error("Your login session timed out");
+        dispatch(handleLogout());
+        dispatch(resetCart());
+        return Promise.reject(err); // Don't retry with an expired refresh token
+      }
 
       const status = err.status || response?.status; // Handle potential undefined response object
 
@@ -81,15 +82,15 @@ const setupAxiosInterceptors = () => {
         dispatch(resetCart());
       } else if (status === 403) {
         // Handle authentication errors with token refresh
-        console.log(response.data.message === 'Cant find' ? 'check' : 'uncheck');
-        if(response.data.message === 'Cant find'){
+        console.log(
+          response.data.message === "Cant find" ? "check" : "uncheck"
+        );
+        if (response.data.message === "Cant find") {
           toast.error("Your login session timed out");
           dispatch(handleLogout());
           dispatch(resetCart());
-          return Promise.reject(err)
+          return Promise.reject(err);
         }
-
-        
 
         if (!hasRetried) {
           hasRetried = true; // Mark the request as retried
@@ -103,8 +104,14 @@ const setupAxiosInterceptors = () => {
           // console.log("New access token: ", newResponse.data.tokens.accessToken);
           // console.log("New refresh token: ", newResponse.data.tokens.refreshToken);
 
-          localStorage.setItem("AccessToken", newResponse.data.tokens.accessToken);
-          localStorage.setItem("RefreshToken", newResponse.data.tokens.refreshToken);
+          localStorage.setItem(
+            "AccessToken",
+            newResponse.data.tokens.accessToken
+          );
+          localStorage.setItem(
+            "RefreshToken",
+            newResponse.data.tokens.refreshToken
+          );
 
           const updatedRequest = {
             ...originalRequest,
@@ -123,149 +130,6 @@ const setupAxiosInterceptors = () => {
 
       console.log(originalRequest.headers.Authorization);
       return Promise.reject(err);
-    }
-  );
-};
-
-
-const setupAxiosInterceptors__ = () => {
-  const dispatch = useDispatch();
-
-  // const navigate = useNavigate();
-
-  const onRequestSuccess = async (req) => {
-    req.headers["Content-Type"] = "application/json";
-    authTokens = localStorage?.getItem("AccessToken");
-
-    req.headers.Authorization = `Bearer ${authTokens}`;
-
-    const user = jwtDecode(authTokens);
-    const isAccessTokenExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
-    console.log("Access token het han: ", isAccessTokenExpired);
-    if (!isAccessTokenExpired) {
-      return req;
-    }
-
-    // refreshToken = localStorage.getItem("RefreshToken");
-    refreshToken = localStorage.getItem("RefreshToken");
-    console.log("Refresh token: ", refreshToken);
-    const response = await axios.post(
-      "https://ecom-server-ymra.onrender.com/api/auth/token",
-      {
-        refreshToken: refreshToken,
-      }
-    );
-    console.log(response);
-    localStorage.setItem("AccessToken", response.data.tokens.accessToken);
-    localStorage.setItem("RefreshToken", response.data.tokens.refreshToken);
-    req.headers.Authorization = `Bearer ${response.data.tokens.accessToken}`;
-    return req;
-  };
-  const onRequestFail = (error) => {
-    console.log("request error", error);
-    return Promise.reject(error);
-  };
-  axiosInstance.interceptors.request.use(onRequestSuccess, onRequestFail);
-
-  const onResponseSuccess = (response) => {
-    // console.log("response success", response);
-    return response;
-  };
-
-  const onResponseFail = (error) => {
-    console.log("response error", error);
-    const status = error.status || error.response.status;
-    if (status === 500 || status === 403) {
-      // status === 403 || status === 401 ||
-      toast.error("Your loggin session timeout");
-      dispatch(handleLogout());
-      dispatch(resetCart());
-    }
-    return Promise.reject(error);
-  };
-  axios.interceptors.response.use(onResponseSuccess, onResponseFail);
-};
-
-let isRefreshing = false;
-let failedQueue = [];
-
-const setupAxiosInterceptors_ = () => {
-  axiosInstance.interceptors.request.use(
-    async (req) => {
-      const AccessToken = localStorage.getItem("AccessToken");
-      if (AccessToken) {
-        req.headers.Authorization = `Bearer ${AccessToken}`;
-      }
-      return req;
-    },
-    (error) => {
-      Promise.reject(error);
-    }
-  );
-
-  async function subscribeTokenRefresh(cb) {
-    failedQueue.push(cb);
-  }
-
-  async function onRefreshed(token) {
-    for (const cb of failedQueue) {
-      await cb(token);
-    }
-    failedQueue = [];
-  }
-
-  axiosInstance.interceptors.response.use(
-    (res) => {
-      return res;
-    },
-    async (err) => {
-      console.log(err);
-      const { config, response } = err;
-      const originalRequest = config;
-
-      // console.log(respond.status);
-
-      if (response && response.status === 403 && !originalRequest._retry) {
-        if (!isRefreshing) {
-          try {
-            const response = await axios.post(
-              "https://ecom-server-ymra.onrender.com/api/auth/token",
-              {
-                refreshToken: refreshToken,
-              }
-            );
-            localStorage.setItem(
-              "AccessToken",
-              response.data.tokens.accessToken
-            );
-            localStorage.setItem(
-              "RefreshToken",
-              response.data.tokens.refreshToken
-            );
-            req.headers.Authorization = `Bearer ${response.data.tokens.accessToken}`;
-            isRefreshing = false;
-            await onRefreshed(response.data.tokens.accessToken);
-            return await axios(originalRequest);
-          } catch (error) {
-            const dispatch = useDispatch();
-            const navigate = useNavigate();
-            isRefreshing(false);
-            dispatch(handleLogout());
-            dispatch(resetCart());
-            return Promise.reject(error);
-          } finally {
-            failedQueue = [];
-          }
-        }
-
-        originalRequest._retry = true;
-        return new Promise((resolve, reject) => {
-          subscribeTokenRefresh(async (token) => {
-            originalRequest.headers["Authorization"] = `Bearer ${token}`;
-            resolve(await axios(originalRequest));
-          });
-        });
-      }
     }
   );
 };
