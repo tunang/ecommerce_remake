@@ -110,7 +110,7 @@ const cartReducer = createSlice({
           .addCase(fetchCart.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            toast.error("Wrong cart");
+            // toast.error("Wrong cart");
           });
       },
 })

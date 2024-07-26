@@ -2,12 +2,14 @@ import fetchProducts from "../../../services/usersServices/ProductsService";
 
 import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 
+import { Swiper, SwiperSlide } from "swiper/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import ProductBox from "../../Products/ProductBox";
 import CircleLoading from "../../Loading/CircleLoading";
-import { Swiper, SwiperSlide } from "swiper/react";
+
 import "swiper/css";
+import 'swiper/css/scrollbar';
 const buttonVariants = {
   hover: {
     backgroundColor: "#414141",
@@ -40,7 +42,7 @@ const NewCollection = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-5 pt-12">
+        <div className="hidden md:grid grid-cols-12 gap-5 pt-12">
             {newProducts?.products?.map((product, index) => {
               return (
                 <div className="col-span-12 md:col-span-6 lg:col-span-3">
@@ -54,6 +56,23 @@ const NewCollection = () => {
               );
             })}
         </div>
+        <div className="md:hidden">
+          <Swiper slidesPerView={1} className=" grid grid-cols-12 gap-5 pt-12">
+              {newProducts?.products?.map((product, index) => {
+                return (
+                  <SwiperSlide className="col-span-12 md:col-span-6 lg:col-span-3">
+                    <ProductBox
+                      product={product}
+                      index={index}
+                      productIndex={productIndex}
+                      setProductIndex={setProductIndex}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+          </Swiper>
+
+        </div>
 
         <div className="text-center">
           <motion.button
@@ -65,6 +84,8 @@ const NewCollection = () => {
           </motion.button>
         </div>
       </div>
+
+      
     </>
   );
 };

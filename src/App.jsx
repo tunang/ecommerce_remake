@@ -19,12 +19,14 @@ import MenPage from "./components/MenPage/MenPage";
 import WomenPage from "./components/WomanPage/WomenPage";
 import DetailProduct from "./components/Products/DetailProduct";
 import Profile from "./components/Profile/Profile";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 import { fetchCart } from "./redux/Reducer/cartReducer";
 import Orders from "./components/Profile/Orders";
 
 import CheckOut from "./components/CheckOut/CheckOut";
 import { setupAxiosInterceptors } from "./services/axios/CustomAxiosWithHeader";
+
 import Favorite from "./components/Favorite/Favorite";
 import Infomation from "./components/Profile/Infomation";
 
@@ -52,7 +54,9 @@ const ProfileLayout = () => (
 );
 
 function App() {
-  setupAxiosInterceptors();
+  
+    setupAxiosInterceptors();
+  
 
   return (
     <div>
@@ -72,8 +76,17 @@ function App() {
           </Route>
 
           <Route element={<ProfileLayout />}>
-            <Route path="/profile/orders" element={<Orders/>}/>
-            <Route path="/profile/infomation" element={<Infomation/>}/>
+            
+            <Route path="/profile/orders" element={
+              <ProtectedRoute>
+                <Orders/>
+              </ProtectedRoute>
+              }/>
+            <Route path="/profile/infomation" element={
+              <ProtectedRoute>
+                <Infomation/>
+              </ProtectedRoute>
+              }/>
           </Route>
         </Routes>
       </Router>

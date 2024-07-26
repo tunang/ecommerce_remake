@@ -81,7 +81,7 @@ const NavBar = () => {
   return (
     <>
       {/* <div className="absolute w-screen h-screen bg-black z-50"></div> */}
-      <nav className="fixed top-0 grid grid-cols-12 h-16 lg:h-20 px-4 lg:px-12 bg-white shadow-md z-10 ">
+      <nav className="fixed top-0 grid grid-cols-12 h-16 lg:h-20 px-4 lg:px-12 bg-white shadow-md z-50 ">
         <AnimatePresence>
           {isAsideActive && (
             <div className="absolute">

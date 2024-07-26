@@ -7,6 +7,31 @@ import { addFavoriteProduct } from "../../redux/Reducer/favoriteReducer";
 import toast from "react-hot-toast";
 import { updateFavoriteList } from "../../services/usersServices/FavoriteService";
 import { useEffect, useState } from "react";
+import ProductModal from "./ProductModal";
+
+
+const modalVariants = {
+  hidden: {
+    opacity: 0,
+  },
+
+  visible: {
+    opacity: 1,
+    transition: {},
+  },
+
+  hover:{
+    scale: 1.1
+  },
+
+  click: {
+    backgroundColor: "#FFFFFF",
+    color: "#000",
+    transition: {
+      duration: 0.1,
+    },
+  },
+};
 
 const buttonVariants = {
   hidden: {
@@ -68,7 +93,7 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
+  const [isShowingModal, setIsShowingModal] = useState(false);
   const userState = useSelector((state) => state.user);
   const favoriteProductsState = useSelector((state) => state.favoriteProducts)
 
@@ -88,6 +113,10 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
     if (event && event.stopPropagation) {
         event.stopPropagation();
     }
+
+    setIsShowingModal(!isShowingModal);
+
+
     // dispatch(handleFavButtonRedux(film));
 }
 
@@ -114,6 +143,15 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
       onMouseOver={() => setProductIndex(index)}
       onMouseLeave={() => setProductIndex("")}
     >
+      <AnimatePresence>
+        {isShowingModal ? 
+        <motion.div className="z-50" variants={modalVariants} initial='hidden' animate='visible' exit='hidden' >
+          <ProductModal id={product.id} setIsShowingModal={setIsShowingModal}/>
+        </motion.div>
+        : ''
+      }
+      </AnimatePresence>
+
       <motion.img
         variants={imageVariants}
         initial="visible"

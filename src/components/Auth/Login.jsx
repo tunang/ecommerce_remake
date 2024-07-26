@@ -7,15 +7,22 @@ import { fetchUser } from "../../redux/Reducer/userReducer";
 import { fetchCart } from "../../redux/Reducer/cartReducer";
 import { fetchFavoriteList } from "../../redux/Reducer/favoriteReducer";
 
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+
+
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [isShowingPassword, setIsShowingPassword] = useState(false);
     const [email, setEmail] = useState('nguyentuan22072004@gmail.com');
     const [password, setPassword] = useState('tuan');
     const isLoading = useSelector(state => state.user.isLoading);
     const account = useSelector(state => state.user.account);
+
+
 
     const handleLogin = async() => {
         if(!email || !password) {
@@ -59,15 +66,18 @@ const Login = () => {
             />
         </div>
 
-        <div className="mt-[18px]">
+        <div className="relative mt-[18px]">
             <h4 className="font-normal">Password</h4>
-            <input
-                className="w-full bg-quinary p-2 mt-[6px] rounded-md" 
-                type="text"
-                placeholder="abc@gmail.com" 
-                value={password}
-                onChange={(e) => (setPassword(e.target.value))}
-            />
+            <div className="relative">
+                <input
+                    className="w-full bg-quinary p-2 mt-[6px] rounded-md" 
+                    type={isShowingPassword ? 'text' : 'password'}
+                    placeholder="abc@gmail.com" 
+                    value={password}
+                    onChange={(e) => (setPassword(e.target.value))}
+                />
+               {isShowingPassword ? <FaEye onClick={() => setIsShowingPassword(!isShowingPassword)} className="absolute right-2 top-1/3 w-5 h-5 ml-4" /> : <FaEyeSlash onClick={() => setIsShowingPassword(!isShowingPassword)} className="absolute right-2 top-1/3 w-5 h-5 ml-4" />} 
+            </div>
         </div>
 
         <div>

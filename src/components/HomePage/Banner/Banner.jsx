@@ -2,12 +2,20 @@ import panel from "../../../../img/BannerImg/banner.jpg";
 import panel2 from "../../../../img/BannerImg/banner2.jpg";
 import panel3 from "../../../../img/BannerImg/banner3.jpg";
 
+
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa6";
 import { GoDot, GoDotFill } from "react-icons/go";
 
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useState } from "react";
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import './banner.css'
+import { Navigation } from 'swiper/modules';
 const panels = [panel, panel2, panel3];
 
 const Banner = () => {
@@ -37,16 +45,15 @@ const Banner = () => {
     }
   }
 
+
   return (
+
+
     <div className="relative">
-      <div className="flex relative w-full h-full overflow-hidden">
+      <Swiper navigation={true} modules={[Navigation]} className="flex relative h-[250px] md:h-[400px] lg:h-[660px] ">
         {panels.map((panel, index) => {
           return (
-            <div
-              className="block w-full h-full shrink-0 grow-0 transition duration-500"
-              style={{ transform: `translateX(${-Index * 100}%)` }}
-            >
-              <div className="relative w-full h-[250px] md:h-[400px] lg:h-[660px] rounded">
+              <SwiperSlide className="relative w-full rounded">
                 <div className="absolute w-full h-full bg-gradient-to-r from-cyan-500 to-blue-500 opacity-[15%]"></div>
                 <img
                   className="w-full h-full object-cover rounded"
@@ -62,19 +69,19 @@ const Banner = () => {
                 <button className="hidden lg:block absolute bg-white  bottom-[20%] right-[10%] text-4xl font-bold px-10 py-3 rounded-full">
                   Buy Now
                 </button>
-              </div>
-            </div>
+              </SwiperSlide>
+            
           );
         })}
-        <FaChevronLeft
+        {/* <FaChevronLeft
           onClick={(e) => handleLeft(e)}
           className="absolute h-full left-0 top-0 w-6 lg:w-12 lg:pl-5 text-white bg-gradient-to-r from-primary drop-shadow-[0px_0px_15px_rgba(0,0,0,1) pl-2 cursor-pointer "
         />
         <FaChevronRight
           onClick={(e) => handleRight(e)}
           className="absolute h-full top-0 right-0 w-6 lg:w-12 lg:pr-5 text-white bg-gradient-to-l from-primary drop-shadow-[0px_0px_15px_rgba(0,0,0,1) pr-2 cursor-pointer"
-        />
-      </div>
+        /> */}
+      </Swiper>
 
       <div className="flex absolute w-full align-middle justify-center bottom-[1%]">
         {panels.map((panel, panelIndex) => {

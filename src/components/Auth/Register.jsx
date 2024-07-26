@@ -31,7 +31,7 @@ const navigate = useNavigate();
     console.log(res);
     if (res.status === 200) {
       toast.success("Register successfull");
-        navigate('/login')
+      navigate('/login')
     } else {
       toast.error("Register unsuccessful");
 

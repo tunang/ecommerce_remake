@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const getOrders = async () => {
     const res = await axiosInstance.get('/api/order');
-    console.log(res);
+    // console.log(res);
     return res;
 
     // const [orders, setOrders] = useState([]);

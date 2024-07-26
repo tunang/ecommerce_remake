@@ -32,16 +32,16 @@ const AddToCartButtonVariants = {
 const DetailProduct = () => {
 
   const dispatch = useDispatch();
-
+  
   const { id } = useParams();
-
+  
+  const userState = useSelector((state) => state.user)
   const cartState = useSelector((state) => state.cart);
-
 
   const { products: product, loading, error } = fetchProducts(`/${id}`);
 
   const [Index, setIndex] = useState(0);
-  const [sizeIndex, setSizeIndex] = useState('');
+  const [sizeIndex, setSizeIndex] = useState(-1);
   const [total, setTotal] = useState(1);
   
 
@@ -70,7 +70,7 @@ const DetailProduct = () => {
   }
 
   const addProductToCart = () => {
-    if(sizeIndex){
+    if(sizeIndex >= 0){
       dispatch(addCart({product, sizeIndex, total}));
       toast.success('Added')
     }
@@ -81,12 +81,11 @@ const DetailProduct = () => {
   }
 
   useEffect(() => {
-    console.log("update cart")
-    updateCart(cartState.products);
+    if(userState.account.auth){
+      console.log("update cart")
+      updateCart(cartState.products);
+  }
   },[cartState.products])
-
-
-
 
   return (
     <>
@@ -146,6 +145,7 @@ const DetailProduct = () => {
                 </div>
             </div>
 
+            {/* Size information */}
             <div className="mt-6">
                 <h4 className="font-normal mb-2">Size</h4>
                 {sizeChart.map((size, index) => { 

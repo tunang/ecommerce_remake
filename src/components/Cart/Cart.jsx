@@ -10,6 +10,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { RiH1 } from "react-icons/ri";
 import { delCart, fetchCart } from "../../redux/Reducer/cartReducer";
 import { getCart, updateCart } from "../../services/usersServices/CartService";
+import NotAuth from "../Loading/NotAuth";
 
 const sizechart = ["X", "S", "M", "XL"];
 
@@ -22,10 +23,6 @@ const Cart = () => {
 
   const { scrollY } = useScroll();
 
-  // useMotionValueEvent(scrollY, "change", (latest) => {
-  //   console.log("Page scroll: ", typeof(latest))
-  // })
-
   const handleTrashIconButton = (productId) => {
     dispatch(delCart(productId));
   };
@@ -33,22 +30,24 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    updateCart(cartState.products);
-
-    let initialValue = 0;
-    cartState.products.forEach((product) => {
-      initialValue += product.price * product.qty;
-      // console.log(product.price * product.qty);
-    });
-    setTotal(initialValue);
+    if(userState.account.auth){
+      updateCart(cartState.products);
+  
+      let initialValue = 0;
+      cartState.products.forEach((product) => {
+        initialValue += product.price * product.qty;
+      });
+      setTotal(initialValue);
+    }
   }, [cartState.products]);
 
   useEffect(() => {
-    // console.log("update cart")
-    dispatch(fetchCart());
+    if(userState.account.auth){
+      dispatch(fetchCart());
+    }
   }, []);
 
-  // console.log(cartState.products)
+
   return (
     <>
       {userState.account.auth === true ? (
@@ -174,7 +173,7 @@ const Cart = () => {
               <div className="flex justify-between">
                 <h3 className="mt-6">Total: </h3>
 
-                <h3 className="mt-6">{total}$</h3>
+                <h3 className="mt-6">{total.toFixed(2)}$</h3>
               </div>
             </div>
 
@@ -189,7 +188,7 @@ const Cart = () => {
           </motion.div>
         </div>
       ) : (
-        <h1>Chua dang nhap</h1>
+        <NotAuth />
       )}
     </>
   );
