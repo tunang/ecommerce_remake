@@ -85,7 +85,7 @@ const setupAxiosInterceptors = () => {
         console.log(
           response.data.message === "Cant find" ? "check" : "uncheck"
         );
-        if (response.data.message === "Cant find") {
+        if (response.data.message) {
           console.log(response.data.message);
           toast.error("Your login session timed out");
           dispatch(handleLogout());
