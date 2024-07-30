@@ -86,6 +86,7 @@ const setupAxiosInterceptors = () => {
           response.data.message === "Cant find" ? "check" : "uncheck"
         );
         if (response.data.message === "Cant find") {
+          console.log(response.data.message);
           toast.error("Your login session timed out");
           dispatch(handleLogout());
           dispatch(resetCart());
@@ -100,9 +101,6 @@ const setupAxiosInterceptors = () => {
             "https://ecom-server-ymra.onrender.com/api/auth/token",
             { refreshToken: RefreshToken }
           );
-
-          // console.log("New access token: ", newResponse.data.tokens.accessToken);
-          // console.log("New refresh token: ", newResponse.data.tokens.refreshToken);
 
           localStorage.setItem(
             "AccessToken",
