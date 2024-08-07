@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-
 import { loginApi } from "../../services/usersServices/UserService";
 import { fetchCart } from "../../redux/Reducer/cartReducer";
 

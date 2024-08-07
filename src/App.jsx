@@ -29,6 +29,7 @@ import { setupAxiosInterceptors } from "./services/axios/CustomAxiosWithHeader";
 
 import Favorite from "./components/Favorite/Favorite";
 import Infomation from "./components/Profile/Infomation";
+import Footer from "./components/Footer/Footer";
 
 const AppLayout = () => (
   <div>
@@ -36,6 +37,9 @@ const AppLayout = () => (
     <div className="mt-[85px] lg:mt-[100px] mx-4 lg:mx-12">
       <Outlet />
     </div>
+    <Footer />
+    
+
   </div>
 );
 
@@ -50,6 +54,8 @@ const ProfileLayout = () => (
         <Outlet />
       </div>
     </div>
+
+    
   </div>
 );
 
@@ -62,6 +68,7 @@ function App() {
     <div>
       <Toaster />
       <Router>
+
         <Routes>
           <Route element={<AppLayout />}>
             <Route path="/" element={<Home />} />
@@ -76,7 +83,7 @@ function App() {
           </Route>
 
           <Route element={<ProfileLayout />}>
-            
+
             <Route path="/profile/orders" element={
               <ProtectedRoute>
                 <Orders/>

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Home from "../HomePage/Home";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { LuPanelLeftClose } from "react-icons/lu";
 import { FiShoppingCart, FiSearch } from "react-icons/fi";
 import { RiMenuLine } from "react-icons/ri";
@@ -44,7 +43,7 @@ const asideVariants = {
     transition: {
       duration: 0.65,
       type: "spring",
-      bounce: 0
+      bounce: 0,
     },
   },
 };
@@ -62,7 +61,7 @@ const exitDivVariants = {
       bounce: 0.1,
     },
   },
-}
+};
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -86,8 +85,13 @@ const NavBar = () => {
           {isAsideActive && (
             <div className="absolute">
               <div className="absolute flex">
-                <motion.div variants={asideVariants} initial='hidden' animate='visible' exit='hidden' className=" bg-white w-60 h-screen px-8 pt-8 z-30">
-
+                <motion.div
+                  variants={asideVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  className=" bg-white w-60 h-screen px-8 pt-8 z-30"
+                >
                   <span
                     onClick={() => setIsAsideActive(!isAsideActive)}
                     className=" mr-2"
@@ -96,7 +100,7 @@ const NavBar = () => {
                   </span>
 
                   <div className="flex flex-col gap-y-4 mt-8">
-                    <Link to={'/'}>
+                    <Link to={"/"}>
                       <h4 className="font-normal">Home</h4>
                     </Link>
                     <Link to={"/men"}>
@@ -107,12 +111,18 @@ const NavBar = () => {
                     </Link>
                   </div>
                 </motion.div>
-
               </div>
 
-                <motion.div variants={exitDivVariants} initial='hidden' animate='visible' exit='hidden' onClick={() => setIsAsideActive(false)} className="bg-gray-700 opacity-50 w-screen h-screen z-20">
-                    {/* <h1>checkout</h1> */}
-                </motion.div>
+              <motion.div
+                variants={exitDivVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                onClick={() => setIsAsideActive(false)}
+                className="fixed bg-gray-700 opacity-50 w-screen h-screen z-20"
+              >
+                {/* <h1>checkout</h1> */}
+              </motion.div>
             </div>
           )}
         </AnimatePresence>
