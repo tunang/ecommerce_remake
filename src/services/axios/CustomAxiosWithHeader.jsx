@@ -61,7 +61,7 @@ const setupAxiosInterceptors = () => {
 
       const RefreshTokenExpire = jwtDecode(RefreshToken);
       const isRefreshTokenExpired =
-        dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
+      dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
       console.table("isRefreshTokenExpired", isRefreshTokenExpired);
       // **Improved retry logic:** Use a dedicated retry flag for clarity
       // let hasRetried = false;
@@ -74,7 +74,7 @@ const setupAxiosInterceptors = () => {
       }
 
       const status = err.status || response?.status; // Handle potential undefined response object
-
+      console.log(status);
       if (status === 500) {
         // Handle server errors (logout, reset cart, etc.)
         toast.error("Your login session timed out");
@@ -82,10 +82,10 @@ const setupAxiosInterceptors = () => {
         dispatch(resetCart());
       } else if (status === 403) {
         // Handle authentication errors with token refresh
-        // console.log(response.data.message);
-        // console.log(
-        //   response.data.message === "Cant find" ? "check" : "uncheck"
-        // );
+        console.log(response.data.message);
+        console.log(
+          response.data.message === "Cant find" ? "check" : "uncheck"
+        );
         if (response.data.message === "Cant find") {
           console.log(1);
           dispatch(handleLogout());
