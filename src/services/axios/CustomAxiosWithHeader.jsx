@@ -82,7 +82,7 @@ const setupAxiosInterceptors = () => {
         dispatch(resetCart());
       } else if (status === 403) {
         // Handle authentication errors with token refresh
-        console.log(response.data.message);
+        console.log(response);
         console.log(
           response.data.message === "Cant find" ? "check" : "uncheck"
         );
@@ -102,6 +102,8 @@ const setupAxiosInterceptors = () => {
             "https://ecom-server-ymra.onrender.com/api/auth/token",
             { refreshToken: RefreshToken }
           );
+
+          console.log(newResponse);
 
           localStorage.setItem(
             "AccessToken",
