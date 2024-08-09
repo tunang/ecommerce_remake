@@ -86,7 +86,6 @@ const setupAxiosInterceptors = () => {
           response.data.message === "Cant find" ? "check" : "uncheck"
         );
         if (response.data.message === "Cant find") {
-          console.log(response.data.message);
           toast.error("Your login session timed out");
           dispatch(handleLogout());
           dispatch(resetCart());
