@@ -82,11 +82,10 @@ const setupAxiosInterceptors = () => {
         dispatch(resetCart());
       } else if (status === 403) {
         // Handle authentication errors with token refresh
-        console.log(response.data.message);
-
-        console.log(
-          response.data.message === "Cant find" ? "check" : "uncheck"
-        );
+        // console.log(response.data.message);
+        // console.log(
+        //   response.data.message === "Cant find" ? "check" : "uncheck"
+        // );
         if (response.data.message === "Cant find") {
           console.log(1);
           dispatch(handleLogout());
