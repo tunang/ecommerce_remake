@@ -15,6 +15,7 @@ const Home = () => {
   const cartState = useSelector((state) => state.cart);
 
     return ( <div>
+        {/* something */}
         <Banner />
 
         <NewCollection />
