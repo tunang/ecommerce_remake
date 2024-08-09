@@ -39,7 +39,7 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="w-[70%] md:w-[60%] lg:w-[30%] mx-auto mt-28 items-center">
+    <div className="w-[70%] md:w-[60%] lg:w-[30%] mx-auto mt-12 items-center">
       <div className=" text-center">
         <h1>Sign up</h1>
       </div>

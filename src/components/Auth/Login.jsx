@@ -49,7 +49,7 @@ const Login = () => {
         }
     },[account])
 
-    return ( <div className="w-[70%] md:w-[50%] lg:w-[25%] mx-auto mt-28 items-center">
+    return ( <div className="w-[70%] md:w-[50%] lg:w-[25%] mx-auto mt-12 items-center">
         <div className=" text-center">
             <h1 >Sign in</h1>
         </div>

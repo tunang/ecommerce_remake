@@ -6,7 +6,7 @@ const NotAuth = () => {
 
   return (
     <div className="flex flex-col h-60 items-center justify-center">
-      <h2>Didn't login ?</h2>
+      <h2 className="font-medium">You must be logged in to access this page</h2>
       <button
         onClick={() => navigate("/login")}
         className="w-60 text-xl text-white bg-quaternary py-3 mt-2 rounded-full"

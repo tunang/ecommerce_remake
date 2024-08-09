@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -31,6 +31,7 @@ const AddToCartButtonVariants = {
 
 const DetailProduct = () => {
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   
   const { id } = useParams();
@@ -73,14 +74,25 @@ const DetailProduct = () => {
     if(userState.account.auth){
       if(sizeIndex >= 0){
         dispatch(addCart({product, sizeIndex, total}));
-        toast.success('Added')
+        toast.success('Product added to cart!')
       }
       else{
-        toast.error("Didn't choose size")
+        toast((t) => (
+          <span>
+            ❗ Choose your size to add to cart.  
+          </span>
+          ));
       }
     }
     else{
-      toast.error("Didn't login")
+      toast((t) => (
+        <span>
+          ⚡ Ready to buy?  
+          <button className="  ml-1 underline font-bold" onClick={() => navigate('/login')}>
+            Log in now
+          </button>
+        </span>
+      ));
     }
   }
 

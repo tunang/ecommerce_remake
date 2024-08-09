@@ -26,11 +26,8 @@ const cartReducer = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         addCart: (state, action) => {
-            console.log('check');
             const respond = action.payload;
-
             console.log(respond)
-
             // mutation
             const exist = state.products.find((x) => {
                 return x.id === respond.product.id && x.size === respond.sizeIndex;
@@ -48,7 +45,6 @@ const cartReducer = createSlice({
                     ...respond.product,
                     qty: respond.total,
                     size: respond.sizeIndex
-
                 })
             }
         },
@@ -110,7 +106,6 @@ const cartReducer = createSlice({
           .addCase(fetchCart.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            // toast.error("Wrong cart");
           });
       },
 })

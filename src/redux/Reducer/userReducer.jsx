@@ -45,6 +45,9 @@ export const userReducer = createSlice({
       state.account.token = "";
       state.account.auth = false;
 
+      toast.success("Logout successful");
+
+
       // toast.success("Logout success");
 
     },
@@ -65,7 +68,7 @@ export const userReducer = createSlice({
         state.isLoading = false;
         state.isError = false;
 
-        toast.success("Login success");
+        toast.success("Login successful");
 
       })
       .addCase(fetchUser.rejected, (state, action) => {

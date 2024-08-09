@@ -2,8 +2,10 @@ import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
-import { Navigate, useNavigate } from "react-router-dom";
-import { addFavoriteProduct } from "../../redux/Reducer/favoriteReducer";
+import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
+
+
+import { addFavoriteProduct, delFavoriteProduct } from "../../redux/Reducer/favoriteReducer";
 import toast from "react-hot-toast";
 import { updateFavoriteList } from "../../services/usersServices/FavoriteService";
 import { useEffect, useState } from "react";
@@ -95,6 +97,8 @@ const iconVariants = {
 const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
 
   const [isShowingModal, setIsShowingModal] = useState(false);
   const userState = useSelector((state) => state.user);
@@ -108,6 +112,8 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
       
     },[favoriteProductsState.products])
   })
+
+
   const handleClick = () => {
     navigate(`/product/${product.id}`);
   };
@@ -128,13 +134,28 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
       event.stopPropagation();
     }
 
+    console.log(location.pathname === '/favorite' ? 1 : 2);
+
       if(userState.account.auth){
-        dispatch(addFavoriteProduct(product));
-        updateFavoriteList(favoriteProductsState.products);
-        toast.success('Added')
+        if(location.pathname === '/favorite'){
+          dispatch(delFavoriteProduct(product));   
+          toast.success('Item removed from wishlist')
+        }
+        else{
+          dispatch(addFavoriteProduct(product));
+          toast.success('Item added to wishlist')
+        }
       }
       else{
-        toast.error('Login first');
+        toast((t) => (
+          <span>
+            ⚠️ Want to save this item?  
+            <button className="  ml-1 underline font-bold" onClick={() => navigate('/login')}>
+              Log in now
+            </button>
+           
+          </span>
+        ));
       }
   };
 

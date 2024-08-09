@@ -1,5 +1,5 @@
 import img1 from "../../../../img/BannerImg/man.jpeg";
-import img2 from "../../../../img/BannerImg/man.jpeg";
+import img2 from "../../../../img/BannerImg/woman.jpg";
 import img3 from "../../../../img/BannerImg/man.jpeg";
 
 import { motion } from "framer-motion";
@@ -27,8 +27,11 @@ const Category = () => {
         return (
           <div className="relative col-span-12 lg:col-span-4" key={index}>
             <img src={ImgUrl} alt="" className="relative w-full h-[350px] lg:h-[500px] object-cover rounded-2xl"/>
-            <p className="absolute text-4xl md:text-5xl text-white top-[70%] left-[3%]">{tags[index]}</p>
-            <motion.button onClick={() => navigate('/men') } variants={buttonVariants} whileTap='click' className="absolute top-[82%] left-[3%] text-3xl text-white bg-tertiary px-10 py-2 rounded-full ">See detail</motion.button>
+            <div className="absolute top-[70%] left-[3%]">
+              <p className=" text-4xl md:text-5xl text-white pb-1">{tags[index]}</p>
+              <motion.button onClick={() => navigate('/men') } variants={buttonVariants} whileTap='click' className=" text-3xl text-white bg-tertiary px-10 py-2 rounded-full ">See detail</motion.button>
+
+            </div>
             
           </div>
         );

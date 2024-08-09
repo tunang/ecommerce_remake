@@ -15,10 +15,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './banner.css'
-import { Navigation } from 'swiper/modules';
-const panels = [panel, panel2, panel3];
+import {Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { useNavigate } from "react-router-dom";
+const panels = [panel, panel2, panel3, panel, panel2, panel3];
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   const [Index, setIndex] = useState(0);
 
   function handleRight(event) {
@@ -50,7 +53,13 @@ const Banner = () => {
 
 
     <div className="relative">
-      <Swiper navigation={true} modules={[Navigation]} className="flex relative h-[250px] md:h-[400px] lg:h-[660px] ">
+      <Swiper speed={1000} autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }} pagination={{
+          dynamicBullets: true,
+        }}
+         navigation={true} modules={[Autoplay, Navigation, Pagination]} className="flex relative h-[250px] md:h-[400px] lg:h-[660px] ">
         {panels.map((panel, index) => {
           return (
               <SwiperSlide className="relative w-full rounded">
@@ -60,13 +69,15 @@ const Banner = () => {
                   src={panel}
                   alt=""
                 />
-                <h1 className="absolute text-3xl md:text-5xl lg:text-7xl text-white bottom-[30%] left-[5%] drop-shadow-[-3px_3px_0px_black]">
-                  NEW COLLECTION
-                </h1>
-                <p className="absolute w-1/2 text-white bottom-[20%] left-[5%]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-                <button className="hidden lg:block absolute bg-white  bottom-[20%] right-[10%] text-4xl font-bold px-10 py-3 rounded-full">
+                <div className="absolute w-full bottom-[25%] left-[5%]">
+                  <h1 className="text-3xl md:text-5xl lg:text-7xl text-white drop-shadow-[-3px_3px_0px_black]">
+                    NEW COLLECTION
+                  </h1>
+                  <p className="w-1/2 text-white">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                </div>
+                <button onClick={() => navigate('/men')} className="hidden lg:block absolute bg-white  bottom-[20%] right-[10%] text-4xl font-bold px-10 py-3 rounded-full">
                   Buy Now
                 </button>
               </SwiperSlide>

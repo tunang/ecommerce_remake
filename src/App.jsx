@@ -32,7 +32,7 @@ import Infomation from "./components/Profile/Infomation";
 import Footer from "./components/Footer/Footer";
 
 const AppLayout = () => (
-  <div>
+  <div className="min-h-screen flex flex-col">
     <NavBar />
     <div className="mt-[85px] lg:mt-[100px] mx-4 lg:mx-12">
       <Outlet />
@@ -44,7 +44,6 @@ const AppLayout = () => (
 );
 
 const ProfileLayout = () => (
-  
   <div>
     <NavBar />
     <div className="mt-[85px] lg:mt-[100px] mx-6 lg:mx-1">

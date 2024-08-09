@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -32,7 +32,7 @@ const AddToCartButtonVariants = {
 const ProductModal = ({id, setIsShowingModal}) => {
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const userState = useSelector((state) => state.user)
   const cartState = useSelector((state) => state.cart);
 
@@ -87,11 +87,24 @@ const ProductModal = ({id, setIsShowingModal}) => {
         toast.success('Added')
       }
       else{
-        toast.error("Didn't choose size")
+        toast((t) => (
+          
+        <span>
+          ❗ Choose your size to add to cart.  
+          
+        </span>
+        ));
       }
     }
     else{
-      toast.error("Didn't login")
+      toast((t) => (
+        <span>
+          ⚡ Ready to buy?  
+          <button className="  ml-1 underline font-bold" onClick={() => navigate('/login')}>
+            Log in now
+          </button>
+        </span>
+      ));
     }
   }
 
@@ -105,9 +118,9 @@ const ProductModal = ({id, setIsShowingModal}) => {
   return (
     <>
       <div className="fixed z-50">
-        <div onClick={(e) => {handleOutsideDiv(e)}} className="fixed top-0 left-0 w-screen h-screen bg-quinary opacity-60" > 
+        <div onClick={(e) => {handleOutsideDiv(e)}} className="fixed top-0 left-0 w-screen h-screen bg-quinary opacity-60 z-60" > 
 
-          </div>
+        </div>
           <div onClick={(e) => handleDiv(e)} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-black py-8 w-[800px] grid grid-cols-12 gap-5 z-50 rounded-lg">
 
           {/* Handle Image */}
@@ -158,8 +171,6 @@ const ProductModal = ({id, setIsShowingModal}) => {
                       <button className="text-xl w-10 leading-[42px] border-2 border-primary">{total}</button>
                       <button className="text-xl w-10 leading-[42px] border-y-2 border-r-2 border-primary" onClick={() => setTotal(total + 1)}>+</button>
                   </div>
-
-
                   <motion.button variants={AddToCartButtonVariants} whileTap='click' className="text-xl text-quinary bg-primary font-medium basis-[60%] leading-[48px] border-2 border-primary" onClick={() => addProductToCart()} >Add to cart</motion.button>
                   
                   <button className=" text-3xl basis-[10%] leading-[48px] border-2 border-primary"><IoHeartOutline className="m-auto" /></button>

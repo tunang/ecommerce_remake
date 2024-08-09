@@ -179,7 +179,7 @@ const NavBar = () => {
                         animate="visible"
                         // whileHover="visible"
                         exit="hidden"
-                        className="absolute right-[-10px] bottom-[-140px] bg-quinary rounded-xl px-6 py-2"
+                        className="absolute top-16 right-0 bg-quinary rounded-xl px-6 py-2"
                       >
                         <Link to={"/profile/infomation"} className="text-xl">
                           Profile
@@ -209,7 +209,7 @@ const NavBar = () => {
                       animate="visible"
                       // whileHover="visible"
                       exit="hidden"
-                      className="absolute right-[-10px] bottom-[-65px]  bg-quinary rounded-xl px-6 py-2"
+                      className="absolute top-16 right-0 bg-quinary rounded-xl px-6 py-2"
                     >
                       <Link to={"/login"} className="text-xl">
                         Login

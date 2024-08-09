@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import { FaRegTrashCan } from "react-icons/fa6";
 import { RiH1 } from "react-icons/ri";
-import { delCart, fetchCart } from "../../redux/Reducer/cartReducer";
+import { delCart,addCart, fetchCart, decreaseCart } from "../../redux/Reducer/cartReducer";
 import { getCart, updateCart } from "../../services/usersServices/CartService";
 import NotAuth from "../Loading/NotAuth";
 
@@ -29,6 +29,16 @@ const Cart = () => {
 
   const [total, setTotal] = useState(0);
 
+
+  const handlePlusButton = (product) => {
+    dispatch(addCart({product, sizeIndex: product.size, total: 1}));
+    console.log(product);
+  }
+
+  const handleMinusButton = (product) => {
+    dispatch(decreaseCart({product, sizeIndex: product.size}))
+  }
+
   useEffect(() => {
     if(userState.account.auth){
       updateCart(cartState.products);
@@ -40,6 +50,7 @@ const Cart = () => {
       setTotal(initialValue);
     }
   }, [cartState.products]);
+
 
   useEffect(() => {
     if(userState.account.auth){
@@ -75,6 +86,7 @@ const Cart = () => {
               </tr>
               {cartState.products.map((product, index) => {
                 return (
+                  // Mobile cart table
                   <tr>
                     <td className="border border-quinary mx-7">
                       <div className="flex flex-col mb-4">
@@ -94,13 +106,13 @@ const Cart = () => {
 
                         <div className="flex md:hidden items-center justify-around">
                           <div className="text-center">
-                            <button className=" w-8 leading-[32px] border-y-2 border-l-2 ">
+                            <button onClick={() => handleMinusButton(product)} className=" w-8 leading-[32px] border-y-2 border-l-2 ">
                               -
                             </button>
                             <button className=" w-8 leading-[32px] border-2 ">
                               {product.qty}
                             </button>
-                            <button className=" w-8 leading-[32px] border-y-2 border-r-2 ">
+                            <button onClick={() => handlePlusButton(product)}  className=" w-8 leading-[32px] border-y-2 border-r-2 ">
                               +
                             </button>
                           </div>
@@ -119,14 +131,16 @@ const Cart = () => {
                       </div>
                     </td>
 
+
+                    {/* Desktop table cart */}
                     <td className="hidden md:table-cell border text-center">
-                      <button className=" w-8 leading-[32px] border-y-2 border-l-2 ">
+                      <button onClick={() => handleMinusButton(product)} className=" w-8 leading-[32px] border-y-2 border-l-2 ">
                         -
                       </button>
                       <button className=" w-8 leading-[32px] border-2 ">
                         {product.qty}
                       </button>
-                      <button className=" w-8 leading-[32px] border-y-2 border-r-2 ">
+                      <button onClick={() => handlePlusButton(product)} className=" w-8 leading-[32px] border-y-2 border-r-2 ">
                         +
                       </button>
                     </td>

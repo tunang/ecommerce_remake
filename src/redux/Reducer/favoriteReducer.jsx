@@ -75,7 +75,7 @@ const cartReducer = createSlice({
           .addCase(fetchFavoriteList.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
-            toast.error("Wrong favorite list");
+            // toast.error("Wrong favorite list");
           });
       },
 })
