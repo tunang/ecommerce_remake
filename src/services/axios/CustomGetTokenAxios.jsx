@@ -2,6 +2,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import { handleLogout } from "../../redux/Reducer/userReducer";
+import { resetCart } from "../../redux/Reducer/cartReducer";
 const axiosTokenInstance = axios.create({
     baseURL: "https://ecom-server-ymra.onrender.com",
     // headers: {Authorization: `Bearer ${authTokens}`},
