@@ -62,7 +62,7 @@ const ProfileLayout = () => (
 function App() {
 
     setupAxiosInterceptors();
-    // setupAxiosTokenInterceptors();
+    setupAxiosTokenInterceptors();
 
   
 

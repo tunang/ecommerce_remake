@@ -17,7 +17,6 @@ import {axiosTokenInstance} from "./CustomGetTokenAxios";
 const axiosInstance = axios.create({
   baseURL: "https://ecom-server-ymra.onrender.com",
   // headers: {Authorization: `Bearer ${authTokens}`},
-  timeout: 60000,
 });
 
 let hasRetried = false;
@@ -85,13 +84,13 @@ const setupAxiosInterceptors = () => {
       else if (status === 403) {
         console.log('error 403')
         // Handle authentication errors with token refresh
-        if (response.data.message === "Cant find") {
-          console.log(1);
-          dispatch(handleLogout());
-          dispatch(resetCart());
-          toast.error("Your login session timed out");
-          return Promise.reject(err);
-        }
+        // if (response.data.message === "Cant find") {
+        //   console.log(1);
+        //   dispatch(handleLogout());
+        //   dispatch(resetCart());
+        //   toast.error("Your login session timed out");
+        //   return Promise.reject(err);
+        // }
 
         if (!hasRetried) {
           hasRetried = true; // Mark the request as retried
@@ -107,11 +106,11 @@ const setupAxiosInterceptors = () => {
 
           localStorage.setItem(
             "AccessToken",
-            newResponse.data.tokens.accessToken
+            newResponse?.data.tokens.accessToken
           );
           localStorage.setItem(
             "RefreshToken",
-            newResponse.data.tokens.refreshToken
+            newResponse?.data.tokens.refreshToken
           );
 
           const updatedRequest = {
