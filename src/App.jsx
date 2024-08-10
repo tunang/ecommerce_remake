@@ -30,6 +30,7 @@ import { setupAxiosInterceptors } from "./services/axios/CustomAxiosWithHeader";
 import Favorite from "./components/Favorite/Favorite";
 import Infomation from "./components/Profile/Infomation";
 import Footer from "./components/Footer/Footer";
+import { setupAxiosTokenInterceptors } from "./services/axios/CustomGetTokenAxios";
 
 const AppLayout = () => (
   <div className="min-h-screen flex flex-col">
@@ -59,8 +60,10 @@ const ProfileLayout = () => (
 );
 
 function App() {
-  
+
     setupAxiosInterceptors();
+    setupAxiosTokenInterceptors();
+
   
 
   return (

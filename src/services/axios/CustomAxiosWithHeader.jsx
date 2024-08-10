@@ -9,6 +9,7 @@ import { handleLogout } from "../../redux/Reducer/userReducer";
 import { resetCart } from "../../redux/Reducer/cartReducer";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import {axiosTokenInstance} from "./CustomGetTokenAxios";
 
 // let authTokens = localStorage?.getItem("AccessToken");
 // let refreshToken = localStorage?.getItem("RefreshToken");
@@ -80,26 +81,28 @@ const setupAxiosInterceptors = () => {
         toast.error("Your login session timed out");
         dispatch(handleLogout());
         dispatch(resetCart());
-      } else if (status === 403) {
+      } 
+      else if (status === 403) {
         // Handle authentication errors with token refresh
-        console.log(response);
-        console.log(
-          response.data.message === "Cant find" ? "check" : "uncheck"
-        );
-        if (response.data.message === "Cant find") {
-          console.log(1);
-          dispatch(handleLogout());
-          dispatch(resetCart());
-          toast.error("Your login session timed out");
-          return Promise.reject(err);
-        }
+        // console.log(response);
+        // console.log(
+        //   response.data.message === "Cant find" ? "check" : "uncheck"
+        // );
+        // if (response.data.message === "Cant find") {
+        //   console.log(1);
+        //   dispatch(handleLogout());
+        //   dispatch(resetCart());
+        //   toast.error("Your login session timed out");
+        //   return Promise.reject(err);
+        // }
 
         if (!hasRetried) {
           hasRetried = true; // Mark the request as retried
 
           console.log("Old RefreshToken: ", RefreshToken);
-          const newResponse = await axios.post(
-            "https://ecom-server-ymra.onrender.com/api/auth/token",
+          
+          const newResponse = await axiosTokenInstance.post(
+            "/api/auth/token",
             { refreshToken: RefreshToken }
           );
 
@@ -129,7 +132,7 @@ const setupAxiosInterceptors = () => {
         }
       }
 
-      console.log(originalRequest.headers.Authorization);
+      // console.log(originalRequest.headers.Authorization);
       return Promise.reject(err);
     }
   );
