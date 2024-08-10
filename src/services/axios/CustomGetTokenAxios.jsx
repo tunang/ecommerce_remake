@@ -30,7 +30,6 @@ const axiosTokenInstance = axios.create({
         console.log("Fail Respond interceptors ran");
         const { config, response } = err;
         const originalRequest = config;
-  
         const status = err.status || response?.status; // Handle potential undefined response object
         console.log(status);
         if (status === 403) {

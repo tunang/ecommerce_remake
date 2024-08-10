@@ -50,6 +50,7 @@ const setupAxiosInterceptors = () => {
       console.log("Fail Respond interceptors ran");
       const { config, response } = err;
       const originalRequest = config;
+      console.log(response.data.message);
 
       const RefreshToken = localStorage.getItem("RefreshToken");
       if (!RefreshToken) {
@@ -84,17 +85,13 @@ const setupAxiosInterceptors = () => {
       } 
       else if (status === 403) {
         // Handle authentication errors with token refresh
-        // console.log(response);
-        // console.log(
-        //   response.data.message === "Cant find" ? "check" : "uncheck"
-        // );
-        // if (response.data.message === "Cant find") {
-        //   console.log(1);
-        //   dispatch(handleLogout());
-        //   dispatch(resetCart());
-        //   toast.error("Your login session timed out");
-        //   return Promise.reject(err);
-        // }
+        if (response.data.message === "Cant find") {
+          console.log(1);
+          dispatch(handleLogout());
+          dispatch(resetCart());
+          toast.error("Your login session timed out");
+          return Promise.reject(err);
+        }
 
         if (!hasRetried) {
           hasRetried = true; // Mark the request as retried
