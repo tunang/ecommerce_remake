@@ -50,7 +50,7 @@ const setupAxiosInterceptors = () => {
       console.log("Fail Respond interceptors ran");
       const { config, response } = err;
       const originalRequest = config;
-      console.log(response.data.message);
+      console.log()
 
       const RefreshToken = localStorage.getItem("RefreshToken");
       if (!RefreshToken) {
@@ -62,8 +62,7 @@ const setupAxiosInterceptors = () => {
       }
 
       const RefreshTokenExpire = jwtDecode(RefreshToken);
-      const isRefreshTokenExpired =
-      dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
+      const isRefreshTokenExpired = dayjs.unix(RefreshTokenExpire.exp).diff(dayjs()) < 1;
       console.table("isRefreshTokenExpired", isRefreshTokenExpired);
       // **Improved retry logic:** Use a dedicated retry flag for clarity
       // let hasRetried = false;
@@ -84,6 +83,7 @@ const setupAxiosInterceptors = () => {
         dispatch(resetCart());
       } 
       else if (status === 403) {
+        console.log('error 403')
         // Handle authentication errors with token refresh
         if (response.data.message === "Cant find") {
           console.log(1);
