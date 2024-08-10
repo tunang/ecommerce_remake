@@ -72,9 +72,9 @@ const NavBar = () => {
   const [isAsideActive, setIsAsideActive] = useState(false);
 
   const handleLogoutClick = async () => {
-    await logoutApi();
-    dispatch(resetCart());
     dispatch(handleLogout());
+    dispatch(resetCart());
+    await logoutApi();
   };
 
   return (

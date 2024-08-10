@@ -94,9 +94,7 @@ const setupAxiosInterceptors = () => {
 
         if (!hasRetried) {
           hasRetried = true; // Mark the request as retried
-
           console.log("Old RefreshToken: ", RefreshToken);
-          
           const newResponse = await axiosTokenInstance.post(
             "/api/auth/token",
             { refreshToken: RefreshToken }
@@ -123,7 +121,6 @@ const setupAxiosInterceptors = () => {
           hasRetried = false;
           console.log(updatedRequest);
           const res = await axios(updatedRequest);
-          console.log(res);
           return res; // Return the response from the retried request
         }
       }
