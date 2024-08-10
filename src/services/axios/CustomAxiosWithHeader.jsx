@@ -103,7 +103,7 @@ const setupAxiosInterceptors = () => {
             { refreshToken: RefreshToken }
           );
 
-          console.log(newResponse);
+          console.log(newResponse.data.message);
 
           localStorage.setItem(
             "AccessToken",
