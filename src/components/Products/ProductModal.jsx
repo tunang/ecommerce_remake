@@ -33,6 +33,7 @@ const ProductModal = ({id, setIsShowingModal}) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const userState = useSelector((state) => state.user)
   const cartState = useSelector((state) => state.cart);
 

@@ -81,7 +81,11 @@ function App() {
             <Route path="/women" element={<WomenPage />} />
             <Route path="/product/:id" element={<DetailProduct />} />
             <Route path="/checkout" element={<CheckOut />} />
-            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/favorite" element={
+              <ProtectedRoute>
+                <Favorite/>
+              </ProtectedRoute>
+              }/>
           </Route>
 
           <Route element={<ProfileLayout />}>
@@ -96,6 +100,7 @@ function App() {
                 <Infomation/>
               </ProtectedRoute>
               }/>
+              
           </Route>
         </Routes>
       </Router>

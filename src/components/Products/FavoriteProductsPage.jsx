@@ -35,11 +35,11 @@ const FavoriteProductsPage = ({ url}) => {
   // }, [favoriteProductsState.products]);
 
 
-  useEffect(() => {
-    if(userState.account.auth){
-      updateFavoriteList(favoriteProductsState.products);
-    }
-  }, [favoriteProductsState.products]);
+  // useEffect(() => {
+  //   if(userState.account.auth){
+  //     updateFavoriteList(favoriteProductsState.products);
+  //   }
+  // }, [favoriteProductsState.products]);
 
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const FavoriteProductsPage = ({ url}) => {
     <div className="grid grid-cols-12 gap-5">
       {favoriteProductsState.products &&
         favoriteProductsState.products.map((product, index) => {
-          return <ProductBox product={product} index={index} productIndex={productIndex} setProductIndex={setProductIndex}/>;
+          return <ProductBox product={product} index={index} productIndex={productIndex} setProductIndex={setProductIndex} />;
         })}
     </div>
     </>

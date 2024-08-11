@@ -106,12 +106,11 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
 
   const favProductsId = useState([]);
 
-
   useEffect(() => {
-    favoriteProductsState.products.map((product, index) => {
-      
-    },[favoriteProductsState.products])
-  })
+    if(userState.account.auth){
+      updateFavoriteList(favoriteProductsState.products);
+    }
+  }, [favoriteProductsState.products]);
 
 
   const handleClick = () => {
@@ -124,8 +123,6 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
     }
 
     setIsShowingModal(!isShowingModal);
-
-
     // dispatch(handleFavButtonRedux(film));
 }
 
@@ -153,7 +150,6 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
             <button className="  ml-1 underline font-bold" onClick={() => navigate('/login')}>
               Log in now
             </button>
-           
           </span>
         ));
       }
@@ -164,6 +160,7 @@ const ProductBox = ({ product, index, productIndex, setProductIndex }) => {
       // border-2 border-tertiary
       className="relative col-span-6 md:col-span-4 lg:col-span-3 w-full bg-white"
       onClick={() => handleClick()}
+      //Hover animation index setter
       onMouseOver={() => setProductIndex(index)}
       onMouseLeave={() => setProductIndex("")}
     >
