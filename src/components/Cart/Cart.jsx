@@ -161,45 +161,50 @@ const Cart = () => {
             </table>
           </div>
 
-          <motion.div
-            className={`static col-start-1 md:col-start-9 col-end-13 mt-6`}
+          {/* Paycheck box */}
+          <div
+            className={`sticky top-0 col-start-1 md:col-start-9 col-end-13 mt-6`}
           >
-            <div className="border-4 border-secondary p-6">
-              <h2 className="font-normal">Paycheck</h2>
+            <div className="sticky top-24">
+              <div className="border-4 border-secondary p-6">
+                <h2 className="font-normal">Paycheck</h2>
 
-              {cartState.products.map((product, index) => {
-                return (
-                  <div>
-                    <div className="flex justify-between">
-                      <div>
-                        <p>
-                          {product.title} - {sizechart[product.size]}{" "}
-                        </p>
-                        <p className="font-extralight italic">
-                          {product.price}$ - Qty: {product.qty}
-                        </p>
+                {cartState.products.map((product, index) => {
+                  return (
+                    <div>
+                      <div className="flex justify-between">
+                        <div>
+                          <p>
+                            {product.title} - {sizechart[product.size]}{" "}
+                          </p>
+                          <p className="font-extralight italic">
+                            {product.price}$ - Qty: {product.qty}
+                          </p>
+                        </div>
+                        <p>{product.price * product.qty}$</p>
                       </div>
-                      <p>{product.price * product.qty}$</p>
                     </div>
-                  </div>
-                );
-              })}
-              <div className="flex justify-between">
-                <h3 className="mt-6">Total: </h3>
+                  );
+                })}
+                <div className="flex justify-between">
+                  <h3 className="mt-6">Total: </h3>
 
-                <h3 className="mt-6">{total.toFixed(2)}$</h3>
+                  <h3 className="mt-6">{total.toFixed(2)}$</h3>
+                </div>
               </div>
+
+              <div className="text-center">
+                <button
+                  onClick={() => navigate("/checkout")}
+                  className="w-full text-xl text-white bg-quaternary py-3 mt-2"
+                >
+                  Check out
+                </button>
+              </div>
+
             </div>
 
-            <div className="text-center">
-              <button
-                onClick={() => navigate("/checkout")}
-                className="w-full text-xl text-white bg-quaternary py-3 mt-2"
-              >
-                Check out
-              </button>
-            </div>
-          </motion.div>
+          </div>
         </div>
       ) : (
         <NotAuth />

@@ -53,7 +53,7 @@ const ProductsPage = ({ url, categories, sortOption }) => {
   }, [sortOption]); // Update only when products or sortOption changes
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts();     
   }, []);
 
   return (

@@ -21,7 +21,6 @@ const panels = [panel, panel2, panel3, panel, panel2, panel3];
 
 const Banner = () => {
   const navigate = useNavigate();
-
   const [Index, setIndex] = useState(0);
 
   function handleRight(event) {

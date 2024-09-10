@@ -19,11 +19,11 @@
     }
 
     h4{
-        @apply lg:text-2xl text-[20px] font-bold;
+        @apply lg:text-[20px] text-[20px] font-bold;
     }
 
     p{
-        @apply lg:text-[16px] text-[13px] ;
+        @apply lg:text-[16px] text-[16px] ;
     }
 }
 

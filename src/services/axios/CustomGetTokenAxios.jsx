@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const axiosTokenInstance = axios.create({
-    baseURL: "https://ecom-server-ymra.onrender.com",
+    baseURL: "https://ecom-server-fuq2.onrender.com",
     // headers: {Authorization: `Bearer ${authTokens}`},
     timeout: 60000,
   });

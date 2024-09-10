@@ -15,7 +15,7 @@ import {axiosTokenInstance} from "./CustomGetTokenAxios";
 // let refreshToken = localStorage?.getItem("RefreshToken");
 
 const axiosInstance = axios.create({
-  baseURL: "https://ecom-server-ymra.onrender.com",
+  baseURL: "https://ecom-server-fuq2.onrender.com",
   // headers: {Authorization: `Bearer ${authTokens}`},
 });
 

@@ -7,10 +7,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import ProductBox from "../../Products/ProductBox";
 import CircleLoading from "../../Loading/CircleLoading";
-import {Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 import "swiper/css";
-import 'swiper/css/scrollbar';
+import "swiper/css/scrollbar";
 import { useNavigate } from "react-router-dom";
 const buttonVariants = {
   hover: {
@@ -47,54 +47,56 @@ const NewCollection = () => {
           </div>
         </div>
         <div className="hidden md:grid grid-cols-12 gap-5 pt-12">
+          {newProducts?.products?.map((product, index) => {
+            return (
+              <div className="col-span-12 md:col-span-6 lg:col-span-3">
+                <ProductBox
+                  product={product}
+                  index={index}
+                  productIndex={productIndex}
+                  setProductIndex={setProductIndex}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <div className="md:hidden">
+          <Swiper
+            speed={800}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Navigation, Pagination]}
+            slidesPerView={1}
+            className=" grid grid-cols-12 gap-5 pt-12"
+          >
             {newProducts?.products?.map((product, index) => {
               return (
-                <div className="col-span-12 md:col-span-6 lg:col-span-3">
+                <SwiperSlide className="col-span-12 md:col-span-6 lg:col-span-3">
                   <ProductBox
                     product={product}
                     index={index}
                     productIndex={productIndex}
                     setProductIndex={setProductIndex}
                   />
-                </div>
+                </SwiperSlide>
               );
             })}
-        </div>
-        <div className="md:hidden">
-          <Swiper speed={800} autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }} modules={[Autoplay, Navigation, Pagination]} slidesPerView={1} className=" grid grid-cols-12 gap-5 pt-12">
-              {newProducts?.products?.map((product, index) => {
-                return (
-                  <SwiperSlide className="col-span-12 md:col-span-6 lg:col-span-3">
-                    <ProductBox
-                      product={product}
-                      index={index}
-                      productIndex={productIndex}
-                      setProductIndex={setProductIndex}
-                    />
-                  </SwiperSlide>
-                );
-              })}
           </Swiper>
-
         </div>
 
         <div className="text-center">
           <motion.button
-
             variants={buttonVariants}
             whileHover="hover"
             className="mt-7 border-2 border-tertiary px-4 py-2"
-            onClick={() => navigate('/men')}
+            onClick={() => navigate("/men")}
           >
             View more
           </motion.button>
         </div>
       </div>
-
-      
     </>
   );
 };
